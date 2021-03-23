@@ -3,9 +3,10 @@
 <head>
         <meta charset="utf-8" />
         <meta name="generator" content="Pelican" />
-        <title>dariushall.com</title>
+        <title>Configuring the AWS CLI</title>
         <link rel="stylesheet" href="https://dariushall.com/theme/css/main.css" />
         <link href="https://dariushall.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="dariushall.com Atom Feed" />
+        <meta name="description" content="Every time I set up a fresh install of an operating system as a result of a new computer or messing around with different OSes on existing..." />
 </head>
 
 <body id="index" class="home">
@@ -13,19 +14,23 @@
                 <h1><a href="https://dariushall.com/">dariushall.com</a></h1>
                 <nav><ul>
                     <li><a href="https://dariushall.com/pages/about.html">about</a></li>
-                    <li><a href="https://dariushall.com/category/aws.html">AWS</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://dariushall.com/drafts/configuring-the-aws-cli.html" rel="bookmark"
+           title="Permalink to Configuring the AWS CLI">Configuring the AWS CLI</a></h1>
+    </header>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="https://dariushall.com/configuring-the-aws-cli.html">Configuring the AWS CLI</a></h1>
+    <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2021-03-23T07:49:30.888286-06:00">
+        <abbr class="published" title="2021-03-23T07:47:11.542050-06:00">
                 Published: Tue 23 March 2021
         </abbr>
 		<br />
-        <abbr class="modified" title="2021-03-23T07:49:30.888286-06:00">
+        <abbr class="modified" title="2021-03-23T07:47:11.542050-06:00">
                 Updated: Tue 23 March 2021
         </abbr>
 
@@ -33,8 +38,8 @@
                 By                         <a class="url fn" href="https://dariushall.com/author/darius.html">Darius</a>
         </address>
 <p>In <a href="https://dariushall.com/category/aws.html">AWS</a>.</p>
-<p>tags: <a href="https://dariushall.com/tag/aws.html">aws</a> <a href="https://dariushall.com/tag/cli.html">cli</a> <a href="https://dariushall.com/tag/awscli.html">awscli</a> <a href="https://dariushall.com/tag/reference.html">reference</a> </p>
-</footer><!-- /.post-info --><p>Every time I set up a fresh install of an operating system as a result of a new computer or messing around with different OSes on existing systems, I end up having to set up the AWS CLI from scratch. I have multiple personal AWS accounts to use for learning and running services that I want on a more resilient platform than running them on a server at home. It's always a pain to find the right doc pages for setting up the CLI with easy MFA assume role, so it's time to document that here.</p>
+
+</footer><!-- /.post-info -->      <p>Every time I set up a fresh install of an operating system as a result of a new computer or messing around with different OSes on existing systems, I end up having to set up the AWS CLI from scratch. I have multiple personal AWS accounts to use for learning and running services that I want on a more resilient platform than running them on a server at home. It's always a pain to find the right doc pages for setting up the CLI with easy MFA assume role, so it's time to document that here.</p>
 <h1>Setting Up the AWS Credentials File</h1>
 <p>The first step is configuring the <code>~/.aws/credentials</code> file. AWS calls this the 'shared credentials file'. The way I use my accounts, I have set up an AWS Organizations organization. The organization master account is the 'front-door' to my other accounts through a 'master role' that can be assumed in all other accounts (including the org master account). I then have a single IAM user in the org master account which has limited IAM permissions, but which can assume the org master role in my several accounts. As such, the only stanza I have in my shared credentials file is:</p>
 <div class="highlight"><pre><span></span><code><span class="o">[</span>default<span class="o">]</span>
@@ -76,8 +81,11 @@
 <ul>
 <li><a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html">AWS CLI docs on AWS's docs site</a></li>
 <li><a href="https://awscli.amazonaws.com/v2/documentation/api/latest/topic/config-vars.html">AWS CLI Command Line Reference config variables</a></li>
-</ul>                </article>
-            </aside><!-- /#featured -->
+</ul>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>links</h2>
