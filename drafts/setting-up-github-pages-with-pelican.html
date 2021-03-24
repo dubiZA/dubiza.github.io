@@ -27,12 +27,12 @@
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2021-03-22T20:42:38.001987-06:00">
-                Published: Mon 22 March 2021
+        <abbr class="published" title="2021-03-23T21:45:49.248857-06:00">
+                Published: Tue 23 March 2021
         </abbr>
 		<br />
-        <abbr class="modified" title="2021-03-22T20:42:38.001987-06:00">
-                Updated: Mon 22 March 2021
+        <abbr class="modified" title="2021-03-23T21:45:49.248857-06:00">
+                Updated: Tue 23 March 2021
         </abbr>
 
         <address class="vcard author">
@@ -50,13 +50,26 @@
 <p><img alt="pelican" src="https://dariushall.com/images/birger-strahl-3FDMW9XoNXU-unsplash.jpg">
 Photo by <a href="https://unsplash.com/@bist31?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" title="Birger Strahl">Birger Strahl</a> on <a href="https://unsplash.com/s/photos/pelican?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" title="Unsplash">Unsplash</a>  </p>
 <hr>
-<h1>Resources I Used</h1>
+<h1><a id="resources"></a>Resources I Used</h1>
 <p>I followed two guides to get this to work:</p>
 <ul>
 <li><a href="https://fedoramagazine.org/make-github-pages-blog-with-pelican/">Fedora Magazine</a> has a pretty solid write up that helped the most in figuring things out</li>
 <li><a href="https://www.tomordonez.com/make-static-website-python-github-pages/">Tom Ordonez's</a> blog is where I found the Fedora Magazine reference and the idea to configure the GitHub Pages site with Cloudflare as CDN</li>
 </ul>
-<h1>1. Setting Up GitHub</h1>
+<h1>Setting Up GitHub</h1>
+<p>If you're not familiar with GitHub Pages, you can <a href="https://pages.github.com/" title="GitHub Pages">read more about it here</a>. In a nutshell, GitHub very generously offers to host "static" web content for you and/or your projects. No infrastructure to worry about. Extremely minimal configuration. The power of git workflow. A common use case for this is publishing personal/project blogs, for which, GitHub integrates with the Ruby based static site generator <a href="https://jekyllrb.com/" title="Jekyll Static Site Generator">Jekyl</a>.</p>
+<p>While I'm sure Jekyll is great, I'm a Python guy and decided to make the GitHub Pages (GHP) thing a tiny bit more complicated by using a Python based static site generator called <a href="https://blog.getpelican.com/" title="Pelican Python Static Site Generator">Pelican</a>. While GHP is capabile of automatically building the static files (HTML, etc.) when using Jekyll, choosing to use Pelican appears to mean doing things more manually (I say appears because I haven't actually looked further in to automating builds with anything else). To accomodate this manual process, two GitHub repos are suggested.</p>
+<h2>Creating the Repos</h2>
+<p>The <a href="#resources">Fedora Magazine</a> write up I followed suggests creating one GitHub repo named the way GHP requires, which is in the form <code>username.github.io</code> (follow the <a href="https://docs.github.com/en/github/working-with-github-pages/creating-a-github-pages-site" title="GitHub Pages Docs">official GHP docs</a> if you are unsure how to do this). This is where the output files from Pelican will go. The name of the repo <strong>must exactly match</strong> <code>username.github.io</code> -- if it does not, GHP will not work. Make sure to initialize the repo with a readme. I left mine as a public repo.</p>
+<p>I suppose the second repo name doesn't matter too much, but it is suggested to name it <code>username.github.io-src</code>. This repo will contain the source files used to generate the HTML, CSS, etc. I set mine up with a <code>.gitignore</code> for Python and, though it's probably not necessary, have it as a private repo.</p>
+<h2>Cloning the Repos</h2>
+<h1>Setting Up Python and Pelican</h1>
+<h2>Creating the Python Virtual Environment</h2>
+<h2>Installing Pelican</h2>
+<h2>Initializing Pelican</h2>
+<h2>Configuring Pelican</h2>
+<h1>Setting Up a Custom Domain</h1>
+<h1>Fonting GitHub Pages with Cloudflare CDN</h1>
     </div><!-- /.entry-content -->
 
   </article>
