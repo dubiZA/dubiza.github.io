@@ -1,109 +1,152 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <meta name="generator" content="Pelican" />
-        <title>dariushall.com - aws</title>
-        <link rel="stylesheet" href="https://dariushall.com/theme/css/main.css" />
-        <link href="https://dariushall.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="dariushall.com Atom Feed" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://dariushall.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://dariushall.com/theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://dariushall.com/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://dariushall.com/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://dariushall.com/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://dariushall.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Darius Hall Atom">
+
+
+
+  
+
+
+    <meta name="author" content="Darius" />
+    <meta name="description" content="" />
+<meta property="og:site_name" content="Darius Hall"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Darius Hall"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://dariushall.com"/>
+<meta property="og:image" content="/images/profile.jpg">
+
+  <title>Darius Hall &ndash; Tag aws</title>
+
 </head>
+<body class="light-theme">
+  <aside>
+    <div>
+      <a href="https://dariushall.com">
+        <img src="/images/profile.jpg" alt="Darius Hall" title="Darius Hall">
+      </a>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="https://dariushall.com/">dariushall.com</a></h1>
-                <nav><ul>
-                    <li><a href="https://dariushall.com/pages/about.html">about</a></li>
-                    <li><a href="https://dariushall.com/category/aws.html">AWS</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+      <h1>
+        <a href="https://dariushall.com">Darius Hall</a>
+      </h1>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="https://dariushall.com/configuring-the-aws-cli.html">Configuring the AWS CLI</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2021-03-23T07:49:30.888286-06:00">
-                Published: Tue 23 March 2021
-        </abbr>
-		<br />
-        <abbr class="modified" title="2021-03-23T07:49:30.888286-06:00">
-                Updated: Tue 23 March 2021
-        </abbr>
+<p>My piece of the Internet</p>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://dariushall.com/author/darius.html">Darius</a>
-        </address>
-<p>In <a href="https://dariushall.com/category/aws.html">AWS</a>.</p>
-<p>tags: <a href="https://dariushall.com/tag/aws.html">aws</a> <a href="https://dariushall.com/tag/cli.html">cli</a> <a href="https://dariushall.com/tag/awscli.html">awscli</a> <a href="https://dariushall.com/tag/reference.html">reference</a> </p>
-</footer><!-- /.post-info --><p>Every time I set up a fresh install of an operating system as a result of a new computer or messing around with different OSes on existing systems, I end up having to set up the AWS CLI from scratch. I have multiple personal AWS accounts to use for learning and running services that I want on a more resilient platform than running them on a server at home. It's always a pain to find the right doc pages for setting up the CLI with easy MFA assume role, so it's time to document that here.</p>
-<h1>Setting Up the AWS Credentials File</h1>
-<p>The first step is configuring the <code>~/.aws/credentials</code> file. AWS calls this the 'shared credentials file'. The way I use my accounts, I have set up an AWS Organizations organization. The organization master account is the 'front-door' to my other accounts through a 'master role' that can be assumed in all other accounts (including the org master account). I then have a single IAM user in the org master account which has limited IAM permissions, but which can assume the org master role in my several accounts. As such, the only stanza I have in my shared credentials file is:</p>
-<div class="highlight"><pre><span></span><code><span class="o">[</span>default<span class="o">]</span>
-<span class="nv">aws_access_key_id</span> <span class="o">=</span> AKIAMYACCESSKEY
-<span class="nv">aws_secret_access_key</span> <span class="o">=</span> mySeCREtacc3SSk3y+aws
-</code></pre></div>
+      <nav>
+        <ul class="list">
 
-<p>The above stanza is then used for any CLI call made without specifying a CLI profile. As mentioned earlier, the IAM user to which this credential belongs can't do a whole heck of a lot, so some additional configuration is made in the <code>~/.aws/config</code> file. This file has several more stanzas in it, one of each account in which I want to be able to assume the master role. While I may not be following best practices here for IAM access, being a one man show with only personal accounts and no production sensitive activity going on, this setup suits my needs for now.</p>
-<h1>Setting Up the AWS Config File</h1>
-<p>The AWS Configuration file provides a means for defining profiles which I can then use with the <code>--profile</code> flag when making CLI calls. This file provides a means for defining which role should be used and where to look for the MFA device when needing to issue a command to a specific account. I have MFA required for all assumed role calls using the org master role I have set up. The config file looks like this:</p>
-<div class="highlight"><pre><span></span><code><span class="o">[</span>default<span class="o">]</span>
-<span class="nv">region</span> <span class="o">=</span> us-east-1
-<span class="nv">output</span> <span class="o">=</span> yaml
 
-<span class="o">[</span>profile org-master<span class="o">]</span>
-<span class="nv">region</span> <span class="o">=</span> us-east-1
-<span class="nv">output</span> <span class="o">=</span> yaml
-<span class="nv">role_arn</span> <span class="o">=</span> arn:aws:iam::210987654321:role/role_to_assume
-<span class="nv">mfa_serial</span> <span class="o">=</span> arn:aws:iam::210987654321:mfa/iam_user_name
-<span class="nv">source_profile</span> <span class="o">=</span> default
+              <li>
+                <a target="_self"
+                   href="https://dariushall.com/pages/about.html#about">
+                  about
+                </a>
+              </li>
 
-<span class="o">[</span>profile learning<span class="o">]</span>
-<span class="nv">region</span> <span class="o">=</span> us-east-1
-<span class="nv">output</span> <span class="o">=</span> yaml
-<span class="nv">role_arn</span> <span class="o">=</span> arn:aws:iam::123456789012:role/role_to_assume
-<span class="nv">mfa_serial</span> <span class="o">=</span> arn:aws:iam::210987654321:mfa/iam_user_name
-<span class="nv">source_profile</span> <span class="o">=</span> default
-</code></pre></div>
+            <li>
+              <a target="_self" href="https://getpelican.com/" >Pelican</a>
+            </li>
+            <li>
+              <a target="_self" href="https://palletsprojects.com/p/jinja/" >Jinja2</a>
+            </li>
+        </ul>
+      </nav>
 
-<p>The first stanza is a reference to the default "profile" and credentials set up in the shared credentials file. The second and third stanzas are named profiles, <code>org-master</code> and <code>larning</code> in this case, which tells the CLI how to access and assume the role required to use the profile. The important bits are <code>role_arn</code>, <code>mfa_serial</code> and <code>source_profile</code>. <code>role_arn</code> should be for the role in the account which you want to jump in to. The <code>mfa_serial</code> tells the CLI in which account the MFA device is configured and this should match the account specified in the <code>source_profile</code> section.</p>
-<p>You will notice in the <code>org-master</code> profile, that the AWS account ID in the role ARN and MFA device ARN are the same. In this case, it's because I want to assume the priviledged role in the same account as the IAM user assuming the role.</p>
-<p>In the <code>learning</code> profile, the account ID in the role ARN and MFA device ARN are different. This is because the IAM user defined in the <code>source_profile</code> (the default profile configured with the access key and secret access key for my IAM user) is to assume the role in the account with the ID specified in the <code>role_arn</code>. This all probably sounds terribly confusing. But once it's configured and you've issued <code>aws sts get-caller-identity</code> a few times, with and without the <code>--profile</code> flag, you will see how this all works.</p>
-<h1>Scaling Things Up</h1>
-<p>On my work laptop, my <code>~/.aws/config</code> and <code>~/.aws/credentials</code> files look a little different. In the shared credentials file, I have a couple of different profiles configured, beyond just the 'default'. The shared credentials file is largely the same, but with several stanzas for each IAM user with their own access key and secret access key's defined.</p>
-<p>The configuration file changes a bit in this case if the IAM users are authorized to assume different roles in different accounts. The only things that really change though in the named profiles are the <code>mfa_serial</code> and <code>source_profile</code>. Instead of each named profile having the same configuration for tese two settings, they would be changed depending on the IAM user required to assume the roles in the various accounts.</p>
-<h1>Wrapping Up</h1>
-<p>Hopefully this makes sense to you, the reader. Mostly this is meant to be a quick write up so that I have it available to me next time I need to set this up.</p>
-<p>For what it's worth, here are a handful of links that might come in useful:</p>
-<ul>
-<li><a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html">AWS CLI docs on AWS's docs site</a></li>
-<li><a href="https://awscli.amazonaws.com/v2/documentation/api/latest/topic/config-vars.html">AWS CLI Command Line Reference config variables</a></li>
-</ul>                </article>
-            </aside><!-- /#featured -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>links</h2>
-                        <ul>
-                            <li><a href="https://getpelican.com/">Pelican</a></li>
-                            <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="https://dariushall.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+      <ul class="social">
+          <li>
+            <a  class="sc-LinkedIn" href="https://www.linkedin.com/in/dariushall/" target="_blank">
+              <i class="fab fa-LinkedIn"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-GitHub" href="https://github.com/dubiZA" target="_blank">
+              <i class="fab fa-GitHub"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
 
-                            <li><a href="https://www.linkedin.com/in/dariushall/">LinkedIn</a></li>
-                            <li><a href="https://github.com/dubiZA">GitHub</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+  </aside>
+  <main>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
-                </address><!-- /#about -->
+    <nav>
+      <a href="https://dariushall.com">Home</a>
 
-                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+      <a href="/categories">Categories</a>
+      <a href="/tags">Tags</a>
+
+      <a href="https://dariushall.com/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+
+
+<article>
+  <header>
+    <h2><a href="https://dariushall.com/configuring-the-aws-cli.html#configuring-the-aws-cli">Configuring the AWS CLI</a></h2>
+    <p>
+      Posted on Tue 23 March 2021 in <a href="https://dariushall.com/category/aws.html">AWS</a>
+
+          &#8226; Tagged with
+              <a href="https://dariushall.com/tag/aws.html">aws</a>,              <a href="https://dariushall.com/tag/cli.html">cli</a>,              <a href="https://dariushall.com/tag/awscli.html">awscli</a>,              <a href="https://dariushall.com/tag/reference.html">reference</a>
+    </p>
+  </header>
+  <div>
+      <p>Every time I set up a fresh install of an operating system as a result of a new computer or messing around with different OSes on existing systems, I end up having to set up the AWS CLI from scratch. I have multiple personal AWS accounts to use for learning …</p>
+        <br>
+        <a class="btn"
+           href="https://dariushall.com/configuring-the-aws-cli.html#configuring-the-aws-cli">
+          Continue reading
+        </a>
+  </div>
+</article>
+
+
+
+
+    <footer>
+<p>&copy;  </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Darius Hall ",
+  "url" : "https://dariushall.com",
+  "image": "/images/profile.jpg",
+  "description": ""
+}
+</script>
 
 </body>
 </html>
