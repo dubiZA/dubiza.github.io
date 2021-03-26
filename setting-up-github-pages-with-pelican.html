@@ -60,8 +60,8 @@
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://dariushall.com/setting-up-github-pages-with-pelican.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2021-03-25 22:32:48.188956-06:00"/>
-<meta property="article:modified_time" content="2021-03-25 22:32:48.188956-06:00"/>
+<meta property="article:published_time" content="2021-03-26 07:28:36.488514-06:00"/>
+<meta property="article:modified_time" content="2021-03-26 07:28:36.488514-06:00"/>
 <meta property="article:author" content="https://dariushall.com/author/darius.html">
 <meta property="article:section" content="Other"/>
 <meta property="article:tag" content="python"/>
@@ -144,7 +144,7 @@
       
     <h1 id="setting-up-github-pages-with-pelican">Setting Up GitHub Pages With Pelican</h1>
     <p>
-      Posted on March 25, 2021 in <a href="https://dariushall.com/category/other.html">Other</a>
+      Posted on March 26, 2021 in <a href="https://dariushall.com/category/other.html">Other</a>
 
     </p>
   </header>
@@ -172,7 +172,7 @@ Photo by <a href="https://unsplash.com/@bist31?utm_source=unsplash&amp;utm_mediu
 <p>While I'm sure Jekyll is great, I'm a Python guy and decided to make the GitHub Pages (GHP) thing a tiny bit more complicated by using a Python based static site generator called <a href="https://blog.getpelican.com/" title="Pelican Python Static Site Generator">Pelican</a>. While GHP is capabile of automatically building the static files (HTML, etc.) when using Jekyll, choosing to use Pelican appears to mean doing things more manually (I say appears because I haven't actually looked further in to automating builds with anything else). To accomodate this manual process, two GitHub repos are suggested.</p>
 <h2>Creating the Repos</h2>
 <p>The <a href="#resources">Fedora Magazine</a> write up I followed suggests creating one GitHub repo named the way GHP requires, which is in the form <code>username.github.io</code> (follow the <a href="https://docs.github.com/en/github/working-with-github-pages/creating-a-github-pages-site" title="GitHub Pages Docs">official GHP docs</a> if you are unsure how to do this). This is where the output files from Pelican will go. The name of the repo <strong>must exactly match</strong> <code>username.github.io</code> -- if it does not, GHP will not work. Make sure to initialize the repo with a readme. I left mine as a public repo. This repo will be configured as a submodle within the second repo at a later stage.</p>
-<p>I suppose the second repo name doesn't matter too much, but it is suggested to name it <code>username.github.io-src</code>. This repo will contain the source files used to generate the HTML, CSS, etc. I set mine up with a <code>.gitignore</code> for Python and, though it's probably not necessary, have it as a private repo.</p>
+<p>I suppose the second repo name doesn't matter too much, but it is suggested to name it <code>username.github.io-src</code>. This repo will contain the source files used to generate the HTML, CSS, etc. I set mine up with a <code>.gitignore</code> for Python to make sure I'm not commiting unnecessary Python specific config to the repo.</p>
 <h2>Cloning the Repos</h2>
 <p>Once you have the repos created, they can be cloned to your local machine, but <strong>STOP</strong>: if you are familiar with <code>git clone</code>. Don't clone them both just yet. The <code>username.github.io</code> repo will be set up as a submodule within <code>username.github.io-src</code>. So, follow this sequence to make sure it's done right:</p>
 <p>This assumes you are set up in GitHub to <a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh" title="Using GitHub with SSH">clone via SSH</a>. Make sure to replace <code>&lt;your_username&gt;</code> and to execute this command where you want the cloned repo to exist locally. It will create a new directory called <code>ghpages</code> in your current working directory.</p>
@@ -250,7 +250,7 @@ Is this your personal page <span class="o">(</span>username.github.io<span class
 <p>The options you'll need to change from default are the <code>Do you want to upload your website using GitHub Pages?</code> and <code>Is this your personal page (username.github.io)?</code> Make sure to change those to <code>Y</code>.</p>
 <h2>Configuring Pelican</h2>
 <p>Having completed the <code>pelican-quickstart</code>, you'll have a pretty good initial baseline to build up from. Most of the initial "building up" is done in the pelican configuration files <code>pelicanconf.py</code> and <code>publishconf.py</code>. Some additional configuration will be done through updating the default directory structure as well.</p>
-<h3>Config Files</h3>
+<h3><a id="config-files"></a>Config Files</h3>
 <ul>
 <li><code>pelicanconf.py</code> is the configuration file Pelican uses when building/publishing and running things locally. The settings defined here are also imported in to the <code>publishconf.py</code> file, so it's a good place to configure as many settings as possible that aren't dependant on the final published "product".</li>
 <li><code>publishconf.py</code>, as mentioned above, imports the <code>pelicanconf.py</code> configurations and allows you to overide anything that needs to be changed for the live version of the site. And example would be the <code>SITEURL</code> setting, which you'll defenitely want different between to two files - don't worry, the quickstart will have taken care of that one for you!</li>
@@ -298,7 +298,7 @@ Is this your personal page <span class="o">(</span>username.github.io<span class
 </code></pre></div>
 
 <p>Either way you choose to generate the local instance, it will start up a local webserver listening at <code>localhost:8000</code>. Navigate there with your favorite browser. If I have guided you correctly up to this point, you should have a functioning dev instance of you new site. If things are broken, well... I'm sorry. But you favorite search engine is your friend :D.</p>
-<h2>Publishing to GitHub</h2>
+<h2><a id="publishing"></a>Publishing to GitHub</h2>
 <p>Once you are satisfied with you post, we'll need to move from draft to publish, then publish and push all those changes to GitHub. Make sure to add the meta <code>Status: published</code> to the post.</p>
 <div class="highlight"><pre><span></span><code><span class="n">Title</span><span class="o">:</span> <span class="n">First</span> <span class="n">Post</span>
 <span class="n">Date</span><span class="o">:</span> <span class="mi">2021</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span> <span class="mi">15</span><span class="o">:</span><span class="mi">00</span>
@@ -338,7 +338,22 @@ git push
 <p>Within a few moments, you should be able to visit https://username.github.io with your site live. Now for setting up the custom domain.</p>
 <h1>Setting Up a Custom Domain</h1>
 <p>I'm not going to go over setting up DNS with your domain registrar. That really depends on who your registrar is and there are far too many of those. The <a href="https://docs.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site" title="GitHub Pages Custom Domains">GitHub Pages docs</a> have some guidance here. The GHP docs cover the GitHub config, but I'll mention it here briefly too.</p>
-<p>Go to the <code>username.github.io</code> repo &gt; settings &gt; GitHub Pages section. Add your registered domain name in the field and hit save. GHP supports several types of domain: www.domain.com, custom subdomain (like blog.domain.com), apex domain like domain.com.</p>
+<p>Go to the <code>username.github.io</code> repo &gt; settings &gt; GitHub Pages section. Add your registered domain name in the field and hit save. GHP supports several types of domain: </p>
+<ul>
+<li>www.domain.com</li>
+<li>custom subdomain (like blog.domain.com)</li>
+<li>apex domain like domain.com</li>
+</ul>
+<p>What you provide to GHP will be dependant on how you have set up your DNS records. Whatever it is you choose, it will need to match what we apply to a new file that needs to be created in <code>extra/</code>. In an <a href="#config-files">earlier configuration</a> step for Pelican, we applied a the <code>STATIC_PATHS</code> AND <code>EXTRA_PATH_METADATA</code> settings, referencing a file called <code>CNAME</code>. Create this file now, with no file extention in the <code>extra/</code> directory. Edit the new file by adding the same domain configuration you applied to the GHP setting for your repo. There should be no <code>http(s)://</code> or trailing slash on what you put here. So in my case, with using the apex domain, it was simply</p>
+<div class="highlight"><pre><span></span><code><span class="err">dariushall.com</span>
+</code></pre></div>
+
+<p>Once this is complete, <a href="#publishing">republish you site</a>. Within a few moments, the site should be alive and well. At this point, you should also be able to check the <code>Enforce HTTPS</code> setting within the GHP settings on the repo. This will have GitHub force a redirect from http requests to https.</p>
+<h1>Setting up Cloudflare</h1>
+<p>To improve the user experience and protect you website from some level of abuse, I would encourage you to take advantage of Cloudflare's really generous <a href="https://www.cloudflare.com/plans/" title="Cloudflare Pricing Page">free/personal website tier</a>. In order to do so, sign up for a free account, add your website and follow the instructions. I think they were quite clear and easy to use. Cloudflare basically does all the work for you by importing DNS settings from your registrar and walking you through how to change the default nameservers to Cloudflare's nameservers.</p>
+<p>Cloudflare will then start acting as a Content Deliver Network for your website. A CDN will cache static assets from your website (HTML, JS, CSS, Images, etc.) by requesting them from your website (or origin as they like to call it). Once the CDN has those files, it distributes them to hundreds of CDN servers around the world. Next time a visitor to your site requests an asset cached by the CDN, they will be able to receive that asset from their closest CDN server, dramatically increasing the response time for them, even if they are on the oposite side of the word to your origin server. Check out <a href="https://www.cloudflare.com/learning/cdn/what-is-a-cdn/" title="What is a CDN">Cloudflare's explanation</a> if you want more details.</p>
+<h1>Wrapping Up</h1>
+<p>So, that's it. If all goes well, and I haven't provided a completely garbage set of instructions here, you should have a shiny new website/blog up and running that performs extremely well, and that can withstand up to 59Tbps DDoS attacks, for the cost of just your domain name registration (and maybe a few grey hairs trying to troubleshoot issues). Feel free to take a look at my <a href="https://github.com/dubiZA/dubiza.github.io-src" title="Pelican Source Repo">source repo</a></p>
   </div>
   <div class="tag-cloud">
     <p>
