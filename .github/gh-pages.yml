@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -20,8 +20,14 @@ jobs:
           hugo-version: 'latest'
           # extended: true
 
+      - name: Clean public directory
+        run: rm -rf public
+
       - name: Build
-        run: hugo --minify
+        run: hugo --minify --theme=hello-friend-ng
+
+      - name: Create cname file
+        run: echo 'dariushall.com' > public/CNAME
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
