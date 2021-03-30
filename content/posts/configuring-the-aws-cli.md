@@ -1,7 +1,7 @@
 ---
 title: "Configuring the Aws Cli"
 date: 2021-03-29T16:24:16-06:00
-draft: true
+draft: false
 toc: false
 images:
 tags:
