@@ -26,6 +26,9 @@ jobs:
       - name: Build
         run: hugo --minify --theme=hello-friend-ng
 
+      - name: Add nojekyll
+        run: touch public/.nojekyll
+
       - name: Create cname file
         run: echo 'dariushall.com' > public/CNAME
 
