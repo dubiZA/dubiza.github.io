@@ -1,8 +1,8 @@
 ---
-# title: "{{ replace .Name "-" " " | title }}"
-# date: {{ .Date }}
-# draft: true
-# toc: false
-# tags:
-#   - untagged
+title: "{{ replace .Name "-" " " | title }}"
+date: {{ .Date }}
+draft: true
+toc: false
+tags:
+  - untagged
 ---
