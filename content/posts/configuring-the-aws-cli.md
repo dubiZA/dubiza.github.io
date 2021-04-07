@@ -7,7 +7,7 @@ images:
 tags:
   - aws
   - cli
-  - awscli
+  - aws cli
   - reference
 ---
 
@@ -45,9 +45,9 @@ The AWS Configuration file provides a means for defining profiles which I can th
     mfa_serial = arn:aws:iam::210987654321:mfa/iam_user_name
     source_profile = default
 
-The first stanza is a reference to the default "profile" and credentials set up in the shared credentials file. The second and third stanzas are named profiles, `org-master` and `larning` in this case, which tells the CLI how to access and assume the role required to use the profile. The important bits are `role_arn`, `mfa_serial` and `source_profile`. `role_arn` should be for the role in the account which you want to jump in to. The `mfa_serial` tells the CLI in which account the MFA device is configured and this should match the account specified in the `source_profile` section.
+The first stanza is a reference to the default "profile" and credentials set up in the shared credentials file. The second and third stanzas are named profiles, `org-master` and `learning` in this case, which tells the CLI how to access and assume the role required to use the profile. The important bits are `role_arn`, `mfa_serial` and `source_profile`. `role_arn` should be for the role in the account which you want to jump in to. The `mfa_serial` tells the CLI in which account the MFA device is configured and this should match the account specified in the `source_profile` section.
 
-You will notice in the `org-master` profile, that the AWS account ID in the role ARN and MFA device ARN are the same. In this case, it's because I want to assume the priviledged role in the same account as the IAM user assuming the role.
+You will notice in the `org-master` profile, that the AWS account ID in the role ARN and MFA device ARN are the same. In this case, it's because I want to assume the privileged role in the same account as the IAM user assuming the role.
 
 In the `learning` profile, the account ID in the role ARN and MFA device ARN are different. This is because the IAM user defined in the `source_profile` (the default profile configured with the access key and secret access key for my IAM user) is to assume the role in the account with the ID specified in the `role_arn`. This all probably sounds terribly confusing. But once it's configured and you've issued `aws sts get-caller-identity` a few times, with and without the `--profile` flag, you will see how this all works.
 
@@ -55,7 +55,7 @@ In the `learning` profile, the account ID in the role ARN and MFA device ARN are
 
 On my work laptop, my `~/.aws/config` and `~/.aws/credentials` files look a little different. In the shared credentials file, I have a couple of different profiles configured, beyond just the 'default'. The shared credentials file is largely the same, but with several stanzas for each IAM user with their own access key and secret access key's defined.
 
-The configuration file changes a bit in this case if the IAM users are authorized to assume different roles in different accounts. The only things that really change though in the named profiles are the `mfa_serial` and `source_profile`. Instead of each named profile having the same configuration for tese two settings, they would be changed depending on the IAM user required to assume the roles in the various accounts.
+The configuration file changes a bit in this case if the IAM users are authorized to assume different roles in different accounts. The only things that really change though in the named profiles are the `mfa_serial` and `source_profile`. Instead of each named profile having the same configuration for these two settings, they would be changed depending on the IAM user required to assume the roles in the various accounts.
 
 # Wrapping Up
 

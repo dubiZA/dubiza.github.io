@@ -2,16 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://dariushall.com/tags/aws/</loc>
+    <lastmod>2021-04-07T07:36:28-06:00</lastmod>
+  </url><url>
+    <loc>https://dariushall.com/tags/aws-labs/</loc>
+    <lastmod>2021-04-07T07:36:28-06:00</lastmod>
+  </url><url>
+    <loc>https://dariushall.com/posts/2021/04/aws-waf-labs-operational-excellence/</loc>
+    <lastmod>2021-04-07T07:36:28-06:00</lastmod>
+  </url><url>
+    <loc>https://dariushall.com/</loc>
+    <lastmod>2021-04-07T07:36:28-06:00</lastmod>
+  </url><url>
+    <loc>https://dariushall.com/posts/</loc>
+    <lastmod>2021-04-07T07:36:28-06:00</lastmod>
+  </url><url>
+    <loc>https://dariushall.com/tags/</loc>
+    <lastmod>2021-04-07T07:36:28-06:00</lastmod>
+  </url><url>
+    <loc>https://dariushall.com/tags/well-architected/</loc>
+    <lastmod>2021-04-07T07:36:28-06:00</lastmod>
+  </url><url>
     <loc>https://dariushall.com/about/</loc>
     <lastmod>2021-03-29T21:14:02-06:00</lastmod>
   </url><url>
-    <loc>https://dariushall.com/</loc>
-    <lastmod>2021-03-29T21:14:02-06:00</lastmod>
-  </url><url>
-    <loc>https://dariushall.com/tags/aws/</loc>
-    <lastmod>2021-03-29T16:24:16-06:00</lastmod>
-  </url><url>
-    <loc>https://dariushall.com/tags/awscli/</loc>
+    <loc>https://dariushall.com/tags/aws-cli/</loc>
     <lastmod>2021-03-29T16:24:16-06:00</lastmod>
   </url><url>
     <loc>https://dariushall.com/tags/cli/</loc>
@@ -20,13 +35,7 @@
     <loc>https://dariushall.com/posts/2021/03/configuring-the-aws-cli/</loc>
     <lastmod>2021-03-29T16:24:16-06:00</lastmod>
   </url><url>
-    <loc>https://dariushall.com/posts/</loc>
-    <lastmod>2021-03-29T16:24:16-06:00</lastmod>
-  </url><url>
     <loc>https://dariushall.com/tags/reference/</loc>
-    <lastmod>2021-03-29T16:24:16-06:00</lastmod>
-  </url><url>
-    <loc>https://dariushall.com/tags/</loc>
     <lastmod>2021-03-29T16:24:16-06:00</lastmod>
   </url><url>
     <loc>https://dariushall.com/categories/</loc>

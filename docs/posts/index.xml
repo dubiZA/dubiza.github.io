@@ -6,8 +6,29 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Mon, 29 Mar 2021 16:24:16 -0600</lastBuildDate>
+        <lastBuildDate>Wed, 07 Apr 2021 07:36:28 -0600</lastBuildDate>
         <atom:link href="https://dariushall.com/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>AWS WAF Labs: Operational Excellence</title>
+            <link>https://dariushall.com/posts/2021/04/aws-waf-labs-operational-excellence/</link>
+            <pubDate>Wed, 07 Apr 2021 07:36:28 -0600</pubDate>
+            
+            <guid>https://dariushall.com/posts/2021/04/aws-waf-labs-operational-excellence/</guid>
+            <description>AWS Well-Architected Framework A few month ago, I stumbled across some AWS provided resources in the form of labs that one can work through to better understand some of AWS recommended best practices. I don&amp;rsquo;t fully recall all the links I ended up finding (this is why the blog is being written - I know, browser bookmarks would also have been a good idea&amp;hellip;), but at least one of the places with some good labs to work through is https://wellarchitectedlabs.</description>
+            <content type="html"><![CDATA[<h1 id="aws-well-architected-framework">AWS Well-Architected Framework</h1>
+<p>A few month ago, I stumbled across some AWS provided resources in the form of labs that one can work through to better understand some of AWS recommended best practices. I don&rsquo;t fully recall all the links I ended up finding (this is why the blog is being written - I know, browser bookmarks would also have been a good idea&hellip;), but at least one of the places with some good labs to work through is <a href="https://wellarchitectedlabs.com" title="AWS Well Architected Labs">https://wellarchitectedlabs.com</a>.</p>
+<p>So, this is Part 1 of my experience going through these labs. If you are not acquainted with the Well Architected Framework (WAF), you can read more about it in-depth at <a href="https://aws.amazon.com/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&amp;wa-lens-whitepapers.sort-order=desc" title="AWS Well-Architected">AWS&rsquo;s website</a>. The nutshell version is the WAF is a framework that cloud architects can use to build robust, resilient, secure, performant and scalable cloud based infrastructure and application in the AWS ecosystem. It is comprised of 5 &ldquo;pillars&rdquo;:</p>
+<ol>
+<li>Operational Excellence</li>
+<li>Security</li>
+<li>Reliability</li>
+<li>Performance</li>
+<li>Cost Optimization</li>
+</ol>
+<p>The labs in the series cover each of the 5 pillars. This initial post will go over some of the things that I learned about while working through Operational Excellence pillar.</p>
+]]></content>
+        </item>
         
         <item>
             <title>Configuring the Aws Cli</title>
@@ -44,12 +65,12 @@ role_arn = arn:aws:iam::123456789012:role/role_to_assume
 mfa_serial = arn:aws:iam::210987654321:mfa/iam_user_name
 source_profile = default
 </code></pre>
-<p>The first stanza is a reference to the default &ldquo;profile&rdquo; and credentials set up in the shared credentials file. The second and third stanzas are named profiles, <code>org-master</code> and <code>larning</code> in this case, which tells the CLI how to access and assume the role required to use the profile. The important bits are <code>role_arn</code>, <code>mfa_serial</code> and <code>source_profile</code>. <code>role_arn</code> should be for the role in the account which you want to jump in to. The <code>mfa_serial</code> tells the CLI in which account the MFA device is configured and this should match the account specified in the <code>source_profile</code> section.</p>
-<p>You will notice in the <code>org-master</code> profile, that the AWS account ID in the role ARN and MFA device ARN are the same. In this case, it&rsquo;s because I want to assume the priviledged role in the same account as the IAM user assuming the role.</p>
+<p>The first stanza is a reference to the default &ldquo;profile&rdquo; and credentials set up in the shared credentials file. The second and third stanzas are named profiles, <code>org-master</code> and <code>learning</code> in this case, which tells the CLI how to access and assume the role required to use the profile. The important bits are <code>role_arn</code>, <code>mfa_serial</code> and <code>source_profile</code>. <code>role_arn</code> should be for the role in the account which you want to jump in to. The <code>mfa_serial</code> tells the CLI in which account the MFA device is configured and this should match the account specified in the <code>source_profile</code> section.</p>
+<p>You will notice in the <code>org-master</code> profile, that the AWS account ID in the role ARN and MFA device ARN are the same. In this case, it&rsquo;s because I want to assume the privileged role in the same account as the IAM user assuming the role.</p>
 <p>In the <code>learning</code> profile, the account ID in the role ARN and MFA device ARN are different. This is because the IAM user defined in the <code>source_profile</code> (the default profile configured with the access key and secret access key for my IAM user) is to assume the role in the account with the ID specified in the <code>role_arn</code>. This all probably sounds terribly confusing. But once it&rsquo;s configured and you&rsquo;ve issued <code>aws sts get-caller-identity</code> a few times, with and without the <code>--profile</code> flag, you will see how this all works.</p>
 <h1 id="scaling-things-up">Scaling Things Up</h1>
 <p>On my work laptop, my <code>~/.aws/config</code> and <code>~/.aws/credentials</code> files look a little different. In the shared credentials file, I have a couple of different profiles configured, beyond just the &lsquo;default&rsquo;. The shared credentials file is largely the same, but with several stanzas for each IAM user with their own access key and secret access key&rsquo;s defined.</p>
-<p>The configuration file changes a bit in this case if the IAM users are authorized to assume different roles in different accounts. The only things that really change though in the named profiles are the <code>mfa_serial</code> and <code>source_profile</code>. Instead of each named profile having the same configuration for tese two settings, they would be changed depending on the IAM user required to assume the roles in the various accounts.</p>
+<p>The configuration file changes a bit in this case if the IAM users are authorized to assume different roles in different accounts. The only things that really change though in the named profiles are the <code>mfa_serial</code> and <code>source_profile</code>. Instead of each named profile having the same configuration for these two settings, they would be changed depending on the IAM user required to assume the roles in the various accounts.</p>
 <h1 id="wrapping-up">Wrapping Up</h1>
 <p>Hopefully this makes sense to you, the reader. Mostly this is meant to be a quick write up so that I have it available to me next time I need to set this up.</p>
 <p>For what it&rsquo;s worth, here are a handful of links that might come in useful:</p>
