@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Darius Hall ">
 <meta name="description" content="AWS Well-Architected Framework A few month ago, I stumbled across some AWS provided resources in the form of labs that one can work through to better understand some of AWS recommended best practices. I don&amp;rsquo;t fully recall all the links I ended up finding (this is why the blog is being written - I know, browser bookmarks would also have been a good idea&amp;hellip;), but at least one of the places with some good labs to work through is https://wellarchitectedlabs." />
-<meta name="keywords" content=", aws, aws labs, well architected" />
+<meta name="keywords" content=", aws, aws labs, well architected, operational excellence" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
 <link rel="canonical" href="https://dariushall.com/posts/2021/04/aws-waf-labs-operational-excellence/" />
@@ -44,8 +44,8 @@
 <meta itemprop="name" content="AWS WAF Labs: Operational Excellence">
 <meta itemprop="description" content="AWS Well-Architected Framework A few month ago, I stumbled across some AWS provided resources in the form of labs that one can work through to better understand some of AWS recommended best practices. I don&rsquo;t fully recall all the links I ended up finding (this is why the blog is being written - I know, browser bookmarks would also have been a good idea&hellip;), but at least one of the places with some good labs to work through is https://wellarchitectedlabs."><meta itemprop="datePublished" content="2021-04-07T07:36:28-06:00" />
 <meta itemprop="dateModified" content="2021-04-07T07:36:28-06:00" />
-<meta itemprop="wordCount" content="188"><meta itemprop="image" content="https://dariushall.com"/>
-<meta itemprop="keywords" content="aws,aws labs,well architected," />
+<meta itemprop="wordCount" content="657"><meta itemprop="image" content="https://dariushall.com"/>
+<meta itemprop="keywords" content="aws,aws labs,well architected,operational excellence," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://dariushall.com"/>
 
@@ -130,7 +130,7 @@
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
-        One minute
+        4 minutes
 
         
       </p>
@@ -156,7 +156,17 @@
 <li>Performance</li>
 <li>Cost Optimization</li>
 </ol>
-<p>The labs in the series cover each of the 5 pillars. This initial post will go over some of the things that I learned about while working through Operational Excellence pillar.</p>
+<p>The labs in the series cover each of the 5 pillars. This initial post will go over some of the things that I learned about while working through the Operational Excellence pillar.</p>
+<h1 id="cloudformation">CloudFormation</h1>
+<p>One thing to point out is that the first lab on Operational Excellence makes use of the <a href="https://aws.amazon.com/cloudformation/" title="CloudFormation Service Page">CloudFormation service</a>. If you are not familiar with CloudFormation (CF), it&rsquo;s AWS&rsquo;s declarative Infrastructure as Code (IaC) solution for many things AWS. I say many things and not all things AWS because my experience - albeit limit experience - with it is that CloudFormation is often slow to add support for new services and new features to existing services.</p>
+<h2 id="benefits-of-cloudformation-in-personal-aws-accounts">Benefits of CloudFormation in Personal AWS Accounts</h2>
+<p>CloudFormation (or any IaC tool) is still a very useful service when deploying infrastructure within AWS as it makes things easily repeatable and scales well amongst other benefits. Possibly the biggest benefit to someone running things in their own AWS account for experimentation is that it provides a single place to deploy a whole host of services, infrastructure and more that could otherwise be difficult to keep track of when it comes time to cleaning up.</p>
+<p>If you&rsquo;re running your own personal AWS account to learn new things, I&rsquo;d highly recommend becoming familiar with CloudFormation (or another IaC tool) when deploying infrastructure that could end up costing you money. Once you&rsquo;re done with the infrastructure, deleting the CF stack cleans things up quickly and easily and, ideally, saves you from unexpected bills due to forgotten resources.</p>
+<h2 id="fyi-on-uploading-cf-templates-in-the-aws-console">FYI On Uploading CF Templates in the AWS Console</h2>
+<p>Something I wanted to point out about CloudFormation is that when you deploy CF templates using the AWS console by uploading a template you have already created/downloaded from somewhere, the CF service will attempt to create an S3 bucket in your account and save the template file there.</p>
+<p>The S3 bucket it creates will have a name similar to <code>cf-templates-83lzhmd7bws4-us-east-1</code> (the random bit of text between <code>cf-templates</code> and the region are there to ensure uniqueness in the S3 bucket global namespace). If you end up using the console to upload the same template again at a later time, it will save a new copy of the template to S3. It seems any uploads from the console have a random string added as a prefix to the original filename. To get around repeat uploads of the same template, you can either use the S3 URL when creating a duplicate stack from an existing template, or you can use the AWS CLI when creating stacks.</p>
+<h1 id="warp-up">Warp Up</h1>
+<p>While I realize this post hardly touched on the labs for the Operations Excellence pillar, to avoid too long of a post, I&rsquo;ll end this one here. AWS provides some powerful tools for provisioning and managing infrastructure and services. The Operational Excellence Pillar of the Well-Architected Framework aims to help organizations deliver business value by doing things like automation, defining standards to manage operations etc. CloudFormation certainly touches on some of these key topics.</p>
 
       </div>
     </article>
@@ -171,6 +181,7 @@
         <span class="tag"><a href="https://dariushall.com/tags/aws/">aws</a></span>
         <span class="tag"><a href="https://dariushall.com/tags/aws-labs/">aws labs</a></span>
         <span class="tag"><a href="https://dariushall.com/tags/well-architected/">well architected</a></span>
+        <span class="tag"><a href="https://dariushall.com/tags/operational-excellence/">operational excellence</a></span>
         
     </p>
 
@@ -184,7 +195,7 @@
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        188 Words
+        657 Words
       </p>
 
       <p>
