@@ -7,14 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 07 Apr 2021 07:36:28 -0600</lastBuildDate><atom:link href="https://dariushall.com/tags/operational-excellence/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 16 Apr 2021 06:32:16 -0600</lastBuildDate><atom:link href="https://dariushall.com/tags/operational-excellence/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>AWS Well-Architected Framework Labs - Part 1</title>
-      <link>https://dariushall.com/posts/2021/04/aws-well-architected-framework-labs-part-1/</link>
+      <title>AWS WAF Labs - Part 2: Operational Excellence</title>
+      <link>https://dariushall.com/posts/2021/04/aws-waf-labs-part-2-operational-excellence/</link>
+      <pubDate>Fri, 16 Apr 2021 06:32:16 -0600</pubDate>
+      
+      <guid>https://dariushall.com/posts/2021/04/aws-waf-labs-part-2-operational-excellence/</guid>
+      <description>This is part 2 of a multi-part series of posts as I progress through the AWS WAF Labs available here.
+The AWS Well-Architected Framework (WAF) provides a prescriptive set of guiding principles that solutions architects, cloud engineers, developers, etc. can use to implement what AWS recommends as best practice for operating workloads in the AWS Cloud. The AWS WAF is broken down in to five pillars:
+ Operational Excellence Security Reliability Performance Efficiency Cost Optimization  The Operational Excellence pillar is the focus of this post.</description>
+    </item>
+    
+    <item>
+      <title>AWS Well-Architected Framework Labs - Part 1: Introduction</title>
+      <link>https://dariushall.com/posts/2021/04/aws-well-architected-framework-labs-part-1-introduction/</link>
       <pubDate>Wed, 07 Apr 2021 07:36:28 -0600</pubDate>
       
-      <guid>https://dariushall.com/posts/2021/04/aws-well-architected-framework-labs-part-1/</guid>
-      <description>A few month ago, I stumbled across some AWS provided resources in the form of labs that one can work through to better understand some of AWS recommended best practices. I don&amp;rsquo;t fully recall all the links I ended up finding (this is why the blog is being written - I know, browser bookmarks would also have been a good idea&amp;hellip;), but at least one of the places with some good labs to work through is https://wellarchitectedlabs.</description>
+      <guid>https://dariushall.com/posts/2021/04/aws-well-architected-framework-labs-part-1-introduction/</guid>
+      <description>A few months ago, I stumbled across some AWS provided resources in the form of labs that one can work through to better understand some of AWS recommended best practices. I don&amp;rsquo;t fully recall all the links I ended up finding (this is why the blog is being written - I know, browser bookmarks would also have been a good idea&amp;hellip;), but at least one of the places with some good labs to work through is https://wellarchitectedlabs.</description>
     </item>
     
   </channel>

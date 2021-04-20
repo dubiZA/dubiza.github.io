@@ -6,17 +6,62 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Wed, 07 Apr 2021 07:36:28 -0600</lastBuildDate>
+        <lastBuildDate>Fri, 16 Apr 2021 06:32:16 -0600</lastBuildDate>
         <atom:link href="https://dariushall.com/posts/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
-            <title>AWS Well-Architected Framework Labs - Part 1</title>
-            <link>https://dariushall.com/posts/2021/04/aws-well-architected-framework-labs-part-1/</link>
+            <title>AWS WAF Labs - Part 2: Operational Excellence</title>
+            <link>https://dariushall.com/posts/2021/04/aws-waf-labs-part-2-operational-excellence/</link>
+            <pubDate>Fri, 16 Apr 2021 06:32:16 -0600</pubDate>
+            
+            <guid>https://dariushall.com/posts/2021/04/aws-waf-labs-part-2-operational-excellence/</guid>
+            <description>This is part 2 of a multi-part series of posts as I progress through the AWS WAF Labs available here.
+The AWS Well-Architected Framework (WAF) provides a prescriptive set of guiding principles that solutions architects, cloud engineers, developers, etc. can use to implement what AWS recommends as best practice for operating workloads in the AWS Cloud. The AWS WAF is broken down in to five pillars:
+ Operational Excellence Security Reliability Performance Efficiency Cost Optimization  The Operational Excellence pillar is the focus of this post.</description>
+            <content type="html"><![CDATA[<p>This is part 2 of a multi-part series of posts as I progress through the AWS WAF Labs available <a href="https://wellarchitectedlabs.com" title="AWS Well-Architected Labs">here</a>.</p>
+<p>The AWS Well-Architected Framework (WAF) provides a prescriptive set of guiding principles that solutions architects, cloud engineers, developers, etc. can use to implement what AWS recommends as best practice for operating workloads in the AWS Cloud. The AWS WAF is broken down in to five pillars:</p>
+<ol>
+<li><a href="https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/welcome.html" title="Operational Excellence">Operational Excellence</a></li>
+<li>Security</li>
+<li>Reliability</li>
+<li>Performance Efficiency</li>
+<li>Cost Optimization</li>
+</ol>
+<p>The Operational Excellence pillar is the focus of this post. Operational Excellence includes five design principles:</p>
+<ul>
+<li>Perform operations as code</li>
+<li>Make frequent, small, reversible changes</li>
+<li>Refine operations procedures frequently</li>
+<li>Anticipate failure</li>
+<li>Learn from all operational failures</li>
+</ul>
+<p>The AWS WAF Labs, Operational Excellence pillar lab aims to address several of these design principles by introducing AWS services like CloudFormation, tagging and other tools.</p>
+<h1 id="infrastructure-as-code">Infrastructure as Code</h1>
+<p>As I have gone through the labs, CloudFormation (CFN) certainly address the the design principle of performing operations as code. Additionally, by deploying infrastructure as code, it enables engineers to make those frequent, small and reversible changes suggested by the pillar. Given that the same CFN template can be used in multiple stacks, I can see how CloudFormation could enable teams to anticipate failure as well.</p>
+<p>In the scenario I&rsquo;m thinking of, teams can use &ldquo;green/blue&rdquo; deployments to run identical environments in parallel. When changes are required, those small changes can be made to the which ever deployment is not the currently active or production deployment. If failure is introduced, the failure has been &ldquo;anticipated&rdquo; in a sense by having the non-active deployment (which would match the original state) ready to roll back to with little downtime and impact.</p>
+<p>I shared some additional thoughts on CloudFormation in my part 1 post in this series.</p>
+<h1 id="systems-manager">Systems Manager</h1>
+<p>An interesting service introduced here in the Operational Excellence pillar lab is the Systems Manager (SSM) service. Systems Manager is an agent based tool that, I would say, falls under the Configuration Management family of tools. It also aims to bring together a unified view of operational data from many AWS services across AWS accounts. The data and services provided by SSM allows teams to automate operational elements like inventory (hardware and software) collection, patching and compliance.</p>
+<p>One of the major benefits to Systems Manager is that much of the functionality it provides is at no additional cost and the agent is pre-installed across the majority of AWS provided AMIs available for use with EC2. This makes it almost silly to not use the service, especially if an organization is all-in with AWS.</p>
+<p>SSM provides paths to the design principles of learn from all operational failures, anticipate failure and performing operations as code at the least. The data and insights that can be gathered by using the service all work towards helping teams refine operations procedures frequently as well.</p>
+<h2 id="inventory-management">Inventory Management</h2>
+<p>Systems Manager inventory gathering functionality is exceptionally helpful for organizations and security programs. If you are familiar with the <a href="https://www.cisecurity.org/" title="CIS Homepage">Center for Internet Security</a> (CIS) 20 Critical Controls, you&rsquo;ll the first two are:</p>
+<ol>
+<li>Inventory and Control of Hardware Assets</li>
+<li>Inventory and Control of Software Assets</li>
+</ol>
+<p>At the very least, SSM inventory assists in the collection of inventory data, however, with the use of SSM State Manager, there is also some degree of control of those assets.</p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>AWS Well-Architected Framework Labs - Part 1: Introduction</title>
+            <link>https://dariushall.com/posts/2021/04/aws-well-architected-framework-labs-part-1-introduction/</link>
             <pubDate>Wed, 07 Apr 2021 07:36:28 -0600</pubDate>
             
-            <guid>https://dariushall.com/posts/2021/04/aws-well-architected-framework-labs-part-1/</guid>
-            <description>A few month ago, I stumbled across some AWS provided resources in the form of labs that one can work through to better understand some of AWS recommended best practices. I don&amp;rsquo;t fully recall all the links I ended up finding (this is why the blog is being written - I know, browser bookmarks would also have been a good idea&amp;hellip;), but at least one of the places with some good labs to work through is https://wellarchitectedlabs.</description>
-            <content type="html"><![CDATA[<p>A few month ago, I stumbled across some AWS provided resources in the form of labs that one can work through to better understand some of AWS recommended best practices. I don&rsquo;t fully recall all the links I ended up finding (this is why the blog is being written - I know, browser bookmarks would also have been a good idea&hellip;), but at least one of the places with some good labs to work through is <a href="https://wellarchitectedlabs.com" title="AWS Well Architected Labs">https://wellarchitectedlabs.com</a>.</p>
+            <guid>https://dariushall.com/posts/2021/04/aws-well-architected-framework-labs-part-1-introduction/</guid>
+            <description>A few months ago, I stumbled across some AWS provided resources in the form of labs that one can work through to better understand some of AWS recommended best practices. I don&amp;rsquo;t fully recall all the links I ended up finding (this is why the blog is being written - I know, browser bookmarks would also have been a good idea&amp;hellip;), but at least one of the places with some good labs to work through is https://wellarchitectedlabs.</description>
+            <content type="html"><![CDATA[<p>A few months ago, I stumbled across some AWS provided resources in the form of labs that one can work through to better understand some of AWS recommended best practices. I don&rsquo;t fully recall all the links I ended up finding (this is why the blog is being written - I know, browser bookmarks would also have been a good idea&hellip;), but at least one of the places with some good labs to work through is <a href="https://wellarchitectedlabs.com" title="AWS Well Architected Labs">https://wellarchitectedlabs.com</a>.</p>
 <p>So, this is Part 1 of my experience going through these labs. If you are not acquainted with the Well Architected Framework (WAF), you can read more about it in-depth at <a href="https://aws.amazon.com/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&amp;wa-lens-whitepapers.sort-order=desc" title="AWS Well-Architected">AWS&rsquo;s website</a>. The nutshell version is the WAF is a framework that cloud architects can use to build robust, resilient, secure, performant and scalable cloud based infrastructure and application in the AWS ecosystem. It is comprised of 5 &ldquo;pillars&rdquo;:</p>
 <ol>
 <li>Operational Excellence</li>

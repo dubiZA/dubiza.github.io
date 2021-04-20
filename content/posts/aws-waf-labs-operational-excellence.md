@@ -1,5 +1,5 @@
 ---
-title: "AWS Well-Architected Framework Labs - Part 1"
+title: "AWS Well-Architected Framework Labs - Part 1: Introduction"
 date: 2021-04-07T07:36:28-06:00
 draft: false
 toc: false
@@ -11,7 +11,7 @@ tags:
   - operational excellence
 ---
 
-A few month ago, I stumbled across some AWS provided resources in the form of labs that one can work through to better understand some of AWS recommended best practices. I don't fully recall all the links I ended up finding (this is why the blog is being written - I know, browser bookmarks would also have been a good idea...), but at least one of the places with some good labs to work through is [https://wellarchitectedlabs.com](https://wellarchitectedlabs.com "AWS Well Architected Labs").
+A few months ago, I stumbled across some AWS provided resources in the form of labs that one can work through to better understand some of AWS recommended best practices. I don't fully recall all the links I ended up finding (this is why the blog is being written - I know, browser bookmarks would also have been a good idea...), but at least one of the places with some good labs to work through is [https://wellarchitectedlabs.com](https://wellarchitectedlabs.com "AWS Well Architected Labs").
 
 So, this is Part 1 of my experience going through these labs. If you are not acquainted with the Well Architected Framework (WAF), you can read more about it in-depth at [AWS's website](https://aws.amazon.com/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&wa-lens-whitepapers.sort-order=desc "AWS Well-Architected"). The nutshell version is the WAF is a framework that cloud architects can use to build robust, resilient, secure, performant and scalable cloud based infrastructure and application in the AWS ecosystem. It is comprised of 5 "pillars":
 
