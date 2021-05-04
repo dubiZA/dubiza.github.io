@@ -1,7 +1,7 @@
 ---
 title: "AWS Well-Architected Framework Labs - Part 1: Introduction"
 date: 2021-04-07T07:36:28-06:00
-draft: false
+draft: true
 toc: false
 images:
 tags:

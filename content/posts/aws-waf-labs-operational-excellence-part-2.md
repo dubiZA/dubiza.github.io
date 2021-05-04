@@ -46,11 +46,41 @@ One of the major benefits to Systems Manager is that much of the functionality i
 SSM provides paths to the design principles of learn from all operational failures, anticipate failure and performing operations as code at the least. The data and insights that can be gathered by using the service all work towards helping teams refine operations procedures frequently as well.
 
 ## Inventory Management
-Systems Manager inventory gathering functionality is exceptionally helpful for organizations and security programs. If you are familiar with the [Center for Internet Security](https://www.cisecurity.org/ "CIS Homepage") (CIS) 20 Critical Controls, you'll the first two are:
+Systems Manager inventory gathering functionality is exceptionally helpful for organizations and security programs. If you are familiar with the [Center for Internet Security](https://www.cisecurity.org/ "CIS Homepage") (CIS) 20 Critical Controls, you'll know the first two are:
 
   1. Inventory and Control of Hardware Assets
   2. Inventory and Control of Software Assets
 
 At the very least, SSM inventory assists in the collection of inventory data, however, with the use of SSM State Manager, there is also some degree of control of those assets.
 
- 
+ Inventory gathering can be configured in several ways, allowing Cloud Engineers to target things like capturing inventory on all assets, specific assets by tag or manually specifying instances. Additionally, the type of asset data to collect can also be fine tuned with options including:
+
+  - Applications
+  - AWS components
+  - Network and system metadata
+  - Files
+  - Custom inventory elements you define
+  - Windows specific:
+    - Running services
+    - Roles
+    - Registry
+  - etc
+
+This can information collection can be an extremely helpful tool in understanding workloads in EC2 and meeting compliance requirements for asset inventory collection for both hardware and software.
+
+Inventory collection (like many other System Manger features) relies on SSM State Manager to execute the tasks required for gathering inventory.
+
+## State Manager
+State Manager works with "associations" which are configuration information defining the desired state of an instance, bound (associated) to the target instance(s). The information defines what state the instances should be in, when and how often the state should association should execute for EC2 instances (and even on-prem instances in a hybrid environment) to ensure everything is in a consistent state.
+
+Inventory collection is managed and achieved through State Manager and is essentially made up of four components in State Manager:
+  
+  1. State document
+  2. Target instances
+  3. A schedule
+  4. Parameters
+
+The fourth component is an optional component for State Manager, depending on the association or state document being used. In the case of inventory collection, it defines which inventory elements should be collected (see the list of inventory types above).
+
+## Patch Manager
+Patch Manager is another tool in the Systems Manager tool belt. Patch manager can be used to automate the application of security patches in both Windows and Linux. On Linux hosts, it can be used to apply non-security patches as well.
