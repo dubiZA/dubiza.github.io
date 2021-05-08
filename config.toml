@@ -170,10 +170,6 @@ disableHugoGeneratorInject = false
     name       = "About"
     url        = "about/"
   [[menu.main]]
-    identifier = "posts"
-    name       = "Posts"
-    url        = "posts/"
-  [[menu.main]]
     identifier = "aws"
     name       = "AWS"
     url        = "posts/aws/"
@@ -181,3 +177,7 @@ disableHugoGeneratorInject = false
     identifier = "security"
     name       = "Security"
     url        = "posts/security/"
+  [[menu.main]]
+    identifier = "other"
+    name       = "Other"
+    url        = "posts/other/"
