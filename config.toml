@@ -180,4 +180,4 @@ disableHugoGeneratorInject = false
   [[menu.main]]
     identifier = "other"
     name       = "Other"
-    url        = other/"
+    url        = "other/"
