@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>iam on Darius Hall</title>
+    <link>https://dariushall.com/tags/iam/</link>
+    <description>Recent content in iam on Darius Hall</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 05 May 2021 06:49:25 -0600</lastBuildDate><atom:link href="https://dariushall.com/tags/iam/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Securing a Personal AWS Account</title>
+      <link>https://dariushall.com/posts/2021/05/securing-a-personal-aws-account/</link>
+      <pubDate>Wed, 05 May 2021 06:49:25 -0600</pubDate>
+      
+      <guid>https://dariushall.com/posts/2021/05/securing-a-personal-aws-account/</guid>
+      <description>The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or working with AWS; until you dig in and actually start experimenting, it&amp;rsquo;s not going to become a persistent skill. AWS is an incredible platform that is growing and innovating as a Cloud Services Provider in amazing ways. There are now over 250 services available through AWS, and that list grows bigger every year.</description>
+    </item>
+    
+  </channel>
+</rss>

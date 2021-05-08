@@ -1,7 +1,6 @@
 ---
 title: "About"
-date: 2021-03-29T21:14:02-06:00
-draft: true
+draft: false
 ---
 
 Hi, I'm Darius. This is my bit of space on the world wide web. I hope you enjoy it. By workday, I'm a SecOps Team Lead/Cloud Security Engineer. The rest of the time, I'm a husband, father, and tech enthusiast.
