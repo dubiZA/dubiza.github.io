@@ -1,5 +1,5 @@
 ---
-title: "Configuring the Aws Cli"
+title: "Configuring the AWS CLI"
 date: 2021-03-29T16:24:16-06:00
 draft: false
 toc: false
