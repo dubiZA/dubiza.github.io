@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Darius Hall ">
+<meta name="description" content="The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or working with AWS; until you dig in and actually start experimenting, it&amp;rsquo;s not going to become a persistent skill. AWS is an incredible platform that is growing and innovating as a Cloud Services Provider in amazing ways. There are now over 250 services available through AWS, and that list grows bigger every year." />
+<meta name="keywords" content=", aws, cli, aws cli, reference, cloud security, iam" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://dariushall.com/aws/security-a-personal-aws-account/securing-a-personal-aws-account/" />
+
+
+    <title>
+        
+            Securing a Personal AWS Account :: Darius Hall 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://dariushall.com/main.d7bdd8ee18bfbf4c605488a7e5b1b92cd980dfeed2bdaeab4dd5e931a7a78bc0.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://dariushall.com/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://dariushall.com/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://dariushall.com/favicon-16x16.png">
+    <link rel="manifest" href="https://dariushall.com/site.webmanifest">
+    <link rel="mask-icon" href="https://dariushall.com/safari-pinned-tab.svg" color="#1b1c1d">
+    <link rel="shortcut icon" href="https://dariushall.com/favicon.ico">
+    <meta name="msapplication-TileColor" content="#1b1c1d">
+    <meta name="theme-color" content="#1b1c1d">
+
+
+
+<meta itemprop="name" content="Securing a Personal AWS Account">
+<meta itemprop="description" content="The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or working with AWS; until you dig in and actually start experimenting, it&rsquo;s not going to become a persistent skill. AWS is an incredible platform that is growing and innovating as a Cloud Services Provider in amazing ways. There are now over 250 services available through AWS, and that list grows bigger every year."><meta itemprop="datePublished" content="2021-05-05T06:49:25-06:00" />
+<meta itemprop="dateModified" content="2021-05-05T06:49:25-06:00" />
+<meta itemprop="wordCount" content="583"><meta itemprop="image" content="https://dariushall.com"/>
+<meta itemprop="keywords" content="aws,cli,aws cli,reference,cloud security,iam," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://dariushall.com"/>
+
+<meta name="twitter:title" content="Securing a Personal AWS Account"/>
+<meta name="twitter:description" content="The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or working with AWS; until you dig in and actually start experimenting, it&rsquo;s not going to become a persistent skill. AWS is an incredible platform that is growing and innovating as a Cloud Services Provider in amazing ways. There are now over 250 services available through AWS, and that list grows bigger every year."/>
+
+
+
+
+    <meta property="og:title" content="Securing a Personal AWS Account" />
+<meta property="og:description" content="The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or working with AWS; until you dig in and actually start experimenting, it&rsquo;s not going to become a persistent skill. AWS is an incredible platform that is growing and innovating as a Cloud Services Provider in amazing ways. There are now over 250 services available through AWS, and that list grows bigger every year." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dariushall.com/aws/security-a-personal-aws-account/securing-a-personal-aws-account/" /><meta property="og:image" content="https://dariushall.com"/><meta property="article:section" content="aws" />
+<meta property="article:published_time" content="2021-05-05T06:49:25-06:00" />
+<meta property="article:modified_time" content="2021-05-05T06:49:25-06:00" />
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2021-05-05 06:49:25 -0600 MDT" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://dariushall.com/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">&gt;</span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://dariushall.com/about/">About</a></li><li><a href="https://dariushall.com/aws/">AWS</a></li><li><a href="https://dariushall.com/other/">Other</a></li><li><a href="https://dariushall.com/security/">Security</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://dariushall.com/aws/security-a-personal-aws-account/securing-a-personal-aws-account/">Securing a Personal AWS Account</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <p>The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or working with AWS; until you dig in and actually start experimenting, it&rsquo;s not going to become a persistent skill. AWS is an incredible platform that is growing and innovating as a Cloud Services Provider in amazing ways. There are now over 250 services available through AWS, and that list grows bigger every year.</p>
+<p>AWS makes learning and experimenting on their platform easy for anyone. All you need is a phone number, email address and credit card. AWS has a <a href="https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/" title="Create and Activate an AWS Account">support article</a> that walks through the process, and, given that I&rsquo;ve already got my account set up, I&rsquo;m not going to cover that in this post.</p>
+<p>This post is aimed at securing an AWS account (more through the lense of personal use than enterprise setup) and attempts to do so following the <a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html" title="AWS WAF Home Page">AWS Well-Architected Framework</a>(AWS WAF) with focus on <a href="https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html" title="AWS WAF Security Pillar Home Page">Security Pillar</a> best practices.</p>
+<p>The Security Pillar of the AWS WAF talks about five main areas of security in the cloud:</p>
+<ol>
+<li>Identity and Access Management (IAM)</li>
+<li>Detection</li>
+<li>Infrastructure Protection</li>
+<li>Data Protection</li>
+<li>Incident Response</li>
+</ol>
+<p>This post addresses several of those areas as we work to establish an initial baseline or foundational security controls that any new AWS account should be configured with. These controls apply to an AWS account whether it will be used for personal learning or it is being set up for company use.</p>
+<p>While this post is going to look at setting up an account more from the lens of personal use, in my case, I try to reflect the account &ldquo;architecture&rdquo; as close as possible to what one might see in enterprise use. This means that I use a multi-account setup, even for personal use. Some time ago, AWS introduced the AWS Organizations service as a means to facilitate a multi-account approach to using AWS. AWS accounts can be considered a [hard boundary, zero trust container][aws-orgs] for resources. The recommendation is to use separate, purpose built accounts based on function, common controls or compliance requirements.</p>
+<p>With that in mind, lets jump in to setting up AWS accounts for personal use with a secure baseline, following best practices from the Security Pillar of thw AWS Well-Architected Framework as closely as possible given the personal use use-case.</p>
+<p><em>I should point out that, because I have already had my AWS accounts running for several months, this write-up is not going to be a complete step-by-step, walking through account creation for the initial account, to the initial setup of AWS Organizations. Some of those gaps can be filled by looking at AWS&rsquo;s documentation.</em></p>
+<h1 id="account-architecture">Account Architecture</h1>
+<p>As mentioned above, AWS recommends taking a multi-account approach to using AWS. AWS Introduced AWS Organizations some time ago to facilitate easier management of a multi-account architecture. Many of AWS&rsquo;s services integrate with Organizations for easier deployment across multiple accounts (services like GuardDuty, AWS SSO, CloudTrail, etc).</p>
+<p>I currently have four active AWS accounts:</p>
+<ul>
+<li>Organizations management account (I should point out, given the screenshots that will follow, AWS appears to have renamed some AWS Organizations terminology. The organizational root account memberships used to be referred to as master/member. The terminology is now management/member account in their docs. I had named my accounts using the previous terminology before the change.)</li>
+<li>Security account</li>
+<li>Shared services</li>
+<li>Learning</li>
+</ul>
+<h1 id="securing-the-root-user">Securing the Root User</h1>
+<h1 id="identity-and-access-management">Identity and Access Management</h1>
+<h1 id="account-level-guard-rails">Account Level Guard Rails</h1>
+<h1 id="the-audit-trail">The Audit Trail</h1>
+<h1 id="intelligent-threat-detection">Intelligent Threat Detection</h1>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://dariushall.com/tags/aws/">aws</a></span>
+        <span class="tag"><a href="https://dariushall.com/tags/cli/">cli</a></span>
+        <span class="tag"><a href="https://dariushall.com/tags/aws-cli/">aws cli</a></span>
+        <span class="tag"><a href="https://dariushall.com/tags/reference/">reference</a></span>
+        <span class="tag"><a href="https://dariushall.com/tags/cloud-security/">cloud security</a></span>
+        <span class="tag"><a href="https://dariushall.com/tags/iam/">iam</a></span>
+        
+    </p>
+
+            
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            <span><a href="https://dariushall.com">Darius Hall</a></span>
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span><span><a href="https://dariushall.com/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+          </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="https://dariushall.com/bundle.min.2ce64ea6ea44a72b13dd812fc2eb5cca3efe878cce258a47c137c17edf46e0602a05e422b618a5b80b5939c731b7a293351c2f2222a21f6ee27e54a8448dd20e.js" integrity="sha512-LOZOpupEpysT3YEvwutcyj7&#43;h4zOJYpHwTfBft9G4GAqBeQithiluAtZOccxt6KTNRwvIiKiH27iflSoRI3SDg=="></script>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Darius Hall ">
+<meta name="description" content="This is part 2 of a multi-part series of posts as I progress through the AWS WAF Labs available here.
+The AWS Well-Architected Framework (WAF) provides a prescriptive set of guiding principles that solutions architects, cloud engineers, developers, etc. can use to implement what AWS recommends as best practice for operating workloads in the AWS Cloud. The AWS WAF is broken down in to five pillars:
+ Operational Excellence Security Reliability Performance Efficiency Cost Optimization  The Operational Excellence pillar is the focus of this post." />
+<meta name="keywords" content=", aws, aws labs, well architected, operational excellence" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://dariushall.com/aws/aws-waf-labs-operational-excellence-part-2/" />
+
+
+    <title>
+        
+            AWS WAF Labs - Part 2: Operational Excellence :: Darius Hall 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://dariushall.com/main.d7bdd8ee18bfbf4c605488a7e5b1b92cd980dfeed2bdaeab4dd5e931a7a78bc0.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://dariushall.com/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://dariushall.com/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://dariushall.com/favicon-16x16.png">
+    <link rel="manifest" href="https://dariushall.com/site.webmanifest">
+    <link rel="mask-icon" href="https://dariushall.com/safari-pinned-tab.svg" color="#1b1c1d">
+    <link rel="shortcut icon" href="https://dariushall.com/favicon.ico">
+    <meta name="msapplication-TileColor" content="#1b1c1d">
+    <meta name="theme-color" content="#1b1c1d">
+
+
+
+<meta itemprop="name" content="AWS WAF Labs - Part 2: Operational Excellence">
+<meta itemprop="description" content="This is part 2 of a multi-part series of posts as I progress through the AWS WAF Labs available here.
+The AWS Well-Architected Framework (WAF) provides a prescriptive set of guiding principles that solutions architects, cloud engineers, developers, etc. can use to implement what AWS recommends as best practice for operating workloads in the AWS Cloud. The AWS WAF is broken down in to five pillars:
+ Operational Excellence Security Reliability Performance Efficiency Cost Optimization  The Operational Excellence pillar is the focus of this post."><meta itemprop="datePublished" content="2021-04-16T06:32:16-06:00" />
+<meta itemprop="dateModified" content="2021-04-16T06:32:16-06:00" />
+<meta itemprop="wordCount" content="838"><meta itemprop="image" content="https://dariushall.com"/>
+<meta itemprop="keywords" content="aws,aws labs,well architected,operational excellence," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://dariushall.com"/>
+
+<meta name="twitter:title" content="AWS WAF Labs - Part 2: Operational Excellence"/>
+<meta name="twitter:description" content="This is part 2 of a multi-part series of posts as I progress through the AWS WAF Labs available here.
+The AWS Well-Architected Framework (WAF) provides a prescriptive set of guiding principles that solutions architects, cloud engineers, developers, etc. can use to implement what AWS recommends as best practice for operating workloads in the AWS Cloud. The AWS WAF is broken down in to five pillars:
+ Operational Excellence Security Reliability Performance Efficiency Cost Optimization  The Operational Excellence pillar is the focus of this post."/>
+
+
+
+
+    <meta property="og:title" content="AWS WAF Labs - Part 2: Operational Excellence" />
+<meta property="og:description" content="This is part 2 of a multi-part series of posts as I progress through the AWS WAF Labs available here.
+The AWS Well-Architected Framework (WAF) provides a prescriptive set of guiding principles that solutions architects, cloud engineers, developers, etc. can use to implement what AWS recommends as best practice for operating workloads in the AWS Cloud. The AWS WAF is broken down in to five pillars:
+ Operational Excellence Security Reliability Performance Efficiency Cost Optimization  The Operational Excellence pillar is the focus of this post." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dariushall.com/aws/aws-waf-labs-operational-excellence-part-2/" /><meta property="og:image" content="https://dariushall.com"/><meta property="article:section" content="aws" />
+<meta property="article:published_time" content="2021-04-16T06:32:16-06:00" />
+<meta property="article:modified_time" content="2021-04-16T06:32:16-06:00" />
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2021-04-16 06:32:16 -0600 MDT" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://dariushall.com/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">&gt;</span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://dariushall.com/about/">About</a></li><li><a href="https://dariushall.com/aws/">AWS</a></li><li><a href="https://dariushall.com/other/">Other</a></li><li><a href="https://dariushall.com/security/">Security</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://dariushall.com/aws/aws-waf-labs-operational-excellence-part-2/">AWS WAF Labs - Part 2: Operational Excellence</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <p>This is part 2 of a multi-part series of posts as I progress through the AWS WAF Labs available <a href="https://wellarchitectedlabs.com" title="AWS Well-Architected Labs">here</a>.</p>
+<p>The AWS Well-Architected Framework (WAF) provides a prescriptive set of guiding principles that solutions architects, cloud engineers, developers, etc. can use to implement what AWS recommends as best practice for operating workloads in the AWS Cloud. The AWS WAF is broken down in to five pillars:</p>
+<ol>
+<li><a href="https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/welcome.html" title="Operational Excellence">Operational Excellence</a></li>
+<li>Security</li>
+<li>Reliability</li>
+<li>Performance Efficiency</li>
+<li>Cost Optimization</li>
+</ol>
+<p>The Operational Excellence pillar is the focus of this post. Operational Excellence includes five design principles:</p>
+<ul>
+<li>Perform operations as code</li>
+<li>Make frequent, small, reversible changes</li>
+<li>Refine operations procedures frequently</li>
+<li>Anticipate failure</li>
+<li>Learn from all operational failures</li>
+</ul>
+<p>The AWS WAF Labs, Operational Excellence pillar lab aims to address several of these design principles by introducing AWS services like CloudFormation, tagging and other tools.</p>
+<h1 id="infrastructure-as-code">Infrastructure as Code</h1>
+<p>As I have gone through the labs, CloudFormation (CFN) certainly address the the design principle of performing operations as code. Additionally, by deploying infrastructure as code, it enables engineers to make those frequent, small and reversible changes suggested by the pillar. Given that the same CFN template can be used in multiple stacks, I can see how CloudFormation could enable teams to anticipate failure as well.</p>
+<p>In the scenario I&rsquo;m thinking of, teams can use &ldquo;green/blue&rdquo; deployments to run identical environments in parallel. When changes are required, those small changes can be made to the which ever deployment is not the currently active or production deployment. If failure is introduced, the failure has been &ldquo;anticipated&rdquo; in a sense by having the non-active deployment (which would match the original state) ready to roll back to with little downtime and impact.</p>
+<p>I shared some additional thoughts on CloudFormation in my part 1 post in this series.</p>
+<h1 id="systems-manager">Systems Manager</h1>
+<p>An interesting service introduced here in the Operational Excellence pillar lab is the Systems Manager (SSM) service. Systems Manager is an agent based tool that, I would say, falls under the Configuration Management family of tools. It also aims to bring together a unified view of operational data from many AWS services across AWS accounts. The data and services provided by SSM allows teams to automate operational elements like inventory (hardware and software) collection, patching and compliance.</p>
+<p>One of the major benefits to Systems Manager is that much of the functionality it provides is at no additional cost and the agent is pre-installed across the majority of AWS provided AMIs available for use with EC2. This makes it almost silly to not use the service, especially if an organization is all-in with AWS.</p>
+<p>SSM provides paths to the design principles of learn from all operational failures, anticipate failure and performing operations as code at the least. The data and insights that can be gathered by using the service all work towards helping teams refine operations procedures frequently as well.</p>
+<h2 id="inventory-management">Inventory Management</h2>
+<p>Systems Manager inventory gathering functionality is exceptionally helpful for organizations and security programs. If you are familiar with the <a href="https://www.cisecurity.org/" title="CIS Homepage">Center for Internet Security</a> (CIS) 20 Critical Controls, you&rsquo;ll know the first two are:</p>
+<ol>
+<li>Inventory and Control of Hardware Assets</li>
+<li>Inventory and Control of Software Assets</li>
+</ol>
+<p>At the very least, SSM inventory assists in the collection of inventory data, however, with the use of SSM State Manager, there is also some degree of control of those assets.</p>
+<p>Inventory gathering can be configured in several ways, allowing Cloud Engineers to target things like capturing inventory on all assets, specific assets by tag or manually specifying instances. Additionally, the type of asset data to collect can also be fine tuned with options including:</p>
+<ul>
+<li>Applications</li>
+<li>AWS components</li>
+<li>Network and system metadata</li>
+<li>Files</li>
+<li>Custom inventory elements you define</li>
+<li>Windows specific:
+<ul>
+<li>Running services</li>
+<li>Roles</li>
+<li>Registry</li>
+</ul>
+</li>
+<li>etc</li>
+</ul>
+<p>This can information collection can be an extremely helpful tool in understanding workloads in EC2 and meeting compliance requirements for asset inventory collection for both hardware and software.</p>
+<p>Inventory collection (like many other System Manger features) relies on SSM State Manager to execute the tasks required for gathering inventory.</p>
+<h2 id="state-manager">State Manager</h2>
+<p>State Manager works with &ldquo;associations&rdquo; which are configuration information defining the desired state of an instance, bound (associated) to the target instance(s). The information defines what state the instances should be in, when and how often the state should association should execute for EC2 instances (and even on-prem instances in a hybrid environment) to ensure everything is in a consistent state.</p>
+<p>Inventory collection is managed and achieved through State Manager and is essentially made up of four components in State Manager:</p>
+<ol>
+<li>State document</li>
+<li>Target instances</li>
+<li>A schedule</li>
+<li>Parameters</li>
+</ol>
+<p>The fourth component is an optional component for State Manager, depending on the association or state document being used. In the case of inventory collection, it defines which inventory elements should be collected (see the list of inventory types above).</p>
+<h2 id="patch-manager">Patch Manager</h2>
+<p>Patch Manager is another tool in the Systems Manager tool belt. Patch manager can be used to automate the application of security patches in both Windows and Linux. On Linux hosts, it can be used to apply non-security patches as well.</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://dariushall.com/tags/aws/">aws</a></span>
+        <span class="tag"><a href="https://dariushall.com/tags/aws-labs/">aws labs</a></span>
+        <span class="tag"><a href="https://dariushall.com/tags/well-architected/">well architected</a></span>
+        <span class="tag"><a href="https://dariushall.com/tags/operational-excellence/">operational excellence</a></span>
+        
+    </p>
+
+            
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            <span><a href="https://dariushall.com">Darius Hall</a></span>
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span><span><a href="https://dariushall.com/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+          </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="https://dariushall.com/bundle.min.2ce64ea6ea44a72b13dd812fc2eb5cca3efe878cce258a47c137c17edf46e0602a05e422b618a5b80b5939c731b7a293351c2f2222a21f6ee27e54a8448dd20e.js" integrity="sha512-LOZOpupEpysT3YEvwutcyj7&#43;h4zOJYpHwTfBft9G4GAqBeQithiluAtZOccxt6KTNRwvIiKiH27iflSoRI3SDg=="></script>
+
+
+
+    </body>
+</html>
