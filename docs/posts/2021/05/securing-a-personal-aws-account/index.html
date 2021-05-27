@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Darius Hall ">
 <meta name="description" content="The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or working with AWS; until you dig in and actually start experimenting, it&amp;rsquo;s not going to become a persistent skill. AWS is an incredible platform that is growing and innovating as a Cloud Services Provider in amazing ways. There are now over 250 services available through AWS, and that list grows bigger every year." />
-<meta name="keywords" content=", aws, cli, aws cli, reference, cloud security, iam" />
+<meta name="keywords" content=", aws, reference, cloud security" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
 <link rel="canonical" href="https://dariushall.com/posts/2021/05/securing-a-personal-aws-account/" />
@@ -44,8 +44,8 @@
 <meta itemprop="name" content="Securing a Personal AWS Account">
 <meta itemprop="description" content="The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or working with AWS; until you dig in and actually start experimenting, it&rsquo;s not going to become a persistent skill. AWS is an incredible platform that is growing and innovating as a Cloud Services Provider in amazing ways. There are now over 250 services available through AWS, and that list grows bigger every year."><meta itemprop="datePublished" content="2021-05-05T06:49:25-06:00" />
 <meta itemprop="dateModified" content="2021-05-05T06:49:25-06:00" />
-<meta itemprop="wordCount" content="370"><meta itemprop="image" content="https://dariushall.com"/>
-<meta itemprop="keywords" content="aws,cli,aws cli,reference,cloud security,iam," />
+<meta itemprop="wordCount" content="583"><meta itemprop="image" content="https://dariushall.com"/>
+<meta itemprop="keywords" content="aws,reference,cloud security," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://dariushall.com"/>
 
@@ -130,7 +130,7 @@
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
-        2 minutes
+        3 minutes
 
         
       </p>
@@ -158,10 +158,22 @@
 <li>Incident Response</li>
 </ol>
 <p>This post addresses several of those areas as we work to establish an initial baseline or foundational security controls that any new AWS account should be configured with. These controls apply to an AWS account whether it will be used for personal learning or it is being set up for company use.</p>
-<p>While this post is going to look at setting up an account more from the lens of personal use, in my case, I try to reflect the account &ldquo;architecture&rdquo; as close as possible to what one might see in enterprise use. This means that I use a multi-account setup, even for personal use. Some time ago, AWS introduced the AWS Organizations service as a means facilitate a multi-account approach to using AWS. AWS accounts can be considered a [hard boundary, zero trust container][aws-orgs] for resources. The recommendation is to use separate, purpose built accounts based on function, common controls or compliance requirements.</p>
+<p>While this post is going to look at setting up an account more from the lens of personal use, in my case, I try to reflect the account &ldquo;architecture&rdquo; as close as possible to what one might see in enterprise use. This means that I use a multi-account setup, even for personal use. Some time ago, AWS introduced the AWS Organizations service as a means to facilitate a multi-account approach to using AWS. AWS accounts can be considered a [hard boundary, zero trust container][aws-orgs] for resources. The recommendation is to use separate, purpose built accounts based on function, common controls or compliance requirements.</p>
+<p>With that in mind, lets jump in to setting up AWS accounts for personal use with a secure baseline, following best practices from the Security Pillar of thw AWS Well-Architected Framework as closely as possible given the personal use use-case.</p>
+<p><em>I should point out that, because I have already had my AWS accounts running for several months, this write-up is not going to be a complete step-by-step, walking through account creation for the initial account, to the initial setup of AWS Organizations. Some of those gaps can be filled by looking at AWS&rsquo;s documentation.</em></p>
 <h1 id="account-architecture">Account Architecture</h1>
+<p>As mentioned above, AWS recommends taking a multi-account approach to using AWS. AWS Introduced AWS Organizations some time ago to facilitate easier management of a multi-account architecture. Many of AWS&rsquo;s services integrate with Organizations for easier deployment across multiple accounts (services like GuardDuty, AWS SSO, CloudTrail, etc).</p>
+<p>I currently have four active AWS accounts:</p>
+<ul>
+<li>Organizations management account (I should point out, given the screenshots that will follow, AWS appears to have renamed some AWS Organizations terminology. The organizational root account memberships used to be referred to as master/member. The terminology is now management/member account in their docs. I had named my accounts using the previous terminology before the change.)</li>
+<li>Security account</li>
+<li>Shared services</li>
+<li>Learning</li>
+</ul>
+<p><img src="https://dariushall.com/content/posts/aws/securing-a-personal-aws-account/images/account_architecture.png" alt="Account Architecture"></p>
 <h1 id="securing-the-root-user">Securing the Root User</h1>
 <h1 id="identity-and-access-management">Identity and Access Management</h1>
+<h1 id="account-level-guard-rails">Account Level Guard Rails</h1>
 <h1 id="the-audit-trail">The Audit Trail</h1>
 <h1 id="intelligent-threat-detection">Intelligent Threat Detection</h1>
 
@@ -176,11 +188,8 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
 
         <span class="tag"><a href="https://dariushall.com/tags/aws/">aws</a></span>
-        <span class="tag"><a href="https://dariushall.com/tags/cli/">cli</a></span>
-        <span class="tag"><a href="https://dariushall.com/tags/aws-cli/">aws cli</a></span>
         <span class="tag"><a href="https://dariushall.com/tags/reference/">reference</a></span>
         <span class="tag"><a href="https://dariushall.com/tags/cloud-security/">cloud security</a></span>
-        <span class="tag"><a href="https://dariushall.com/tags/iam/">iam</a></span>
         
     </p>
 
@@ -194,7 +203,7 @@
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        370 Words
+        583 Words
       </p>
 
       <p>
@@ -319,8 +328,8 @@
 
             
             <span class="button next">
-                <a href="https://dariushall.com/posts/2021/04/aws-waf-labs-part-2-operational-excellence/">
-                    <span class="button__text">AWS WAF Labs - Part 2: Operational Excellence</span>
+                <a href="https://dariushall.com/posts/2021/03/configuring-the-aws-cli/">
+                    <span class="button__text">Configuring the AWS CLI</span>
                     <span class="button__icon">→</span>
                 </a>
             </span>

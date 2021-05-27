@@ -7,43 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 05 May 2021 06:49:25 -0600</lastBuildDate><atom:link href="https://dariushall.com/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Securing a Personal AWS Account</title>
-      <link>https://dariushall.com/aws/security-a-personal-aws-account/securing-a-personal-aws-account/</link>
-      <pubDate>Wed, 05 May 2021 06:49:25 -0600</pubDate>
-      
-      <guid>https://dariushall.com/aws/security-a-personal-aws-account/securing-a-personal-aws-account/</guid>
-      <description>The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or working with AWS; until you dig in and actually start experimenting, it&amp;rsquo;s not going to become a persistent skill. AWS is an incredible platform that is growing and innovating as a Cloud Services Provider in amazing ways. There are now over 250 services available through AWS, and that list grows bigger every year.</description>
-    </item>
-    
-    <item>
-      <title>AWS WAF Labs - Part 2: Operational Excellence</title>
-      <link>https://dariushall.com/aws/aws-waf-labs-operational-excellence-part-2/</link>
-      <pubDate>Fri, 16 Apr 2021 06:32:16 -0600</pubDate>
-      
-      <guid>https://dariushall.com/aws/aws-waf-labs-operational-excellence-part-2/</guid>
-      <description>This is part 2 of a multi-part series of posts as I progress through the AWS WAF Labs available here.
-The AWS Well-Architected Framework (WAF) provides a prescriptive set of guiding principles that solutions architects, cloud engineers, developers, etc. can use to implement what AWS recommends as best practice for operating workloads in the AWS Cloud. The AWS WAF is broken down in to five pillars:
- Operational Excellence Security Reliability Performance Efficiency Cost Optimization  The Operational Excellence pillar is the focus of this post.</description>
-    </item>
-    
-    <item>
-      <title>AWS Well-Architected Framework Labs - Part 1: Introduction</title>
-      <link>https://dariushall.com/aws/aws-waf-labs-operational-excellence/</link>
-      <pubDate>Wed, 07 Apr 2021 07:36:28 -0600</pubDate>
-      
-      <guid>https://dariushall.com/aws/aws-waf-labs-operational-excellence/</guid>
-      <description>A few months ago, I stumbled across some AWS provided resources in the form of labs that one can work through to better understand some of AWS recommended best practices. I don&amp;rsquo;t fully recall all the links I ended up finding (this is why the blog is being written - I know, browser bookmarks would also have been a good idea&amp;hellip;), but at least one of the places with some good labs to work through is https://wellarchitectedlabs.</description>
-    </item>
-    
+    <lastBuildDate>Mon, 29 Mar 2021 16:24:16 -0600</lastBuildDate><atom:link href="https://dariushall.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Configuring the AWS CLI</title>
-      <link>https://dariushall.com/aws/configuring-the-aws-cli/</link>
+      <link>https://dariushall.com/posts/2021/03/configuring-the-aws-cli/</link>
       <pubDate>Mon, 29 Mar 2021 16:24:16 -0600</pubDate>
       
-      <guid>https://dariushall.com/aws/configuring-the-aws-cli/</guid>
+      <guid>https://dariushall.com/posts/2021/03/configuring-the-aws-cli/</guid>
       <description>Every time I set up a fresh install of an operating system as a result of a new computer or messing around with different OSes on existing systems, I end up having to set up the AWS CLI from scratch. I have multiple personal AWS accounts to use for learning and running services that I want on a more resilient platform than running them on a server at home. It&amp;rsquo;s always a pain to find the right doc pages for setting up the CLI with easy MFA assume role, so it&amp;rsquo;s time to document that here.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://dariushall.com/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dariushall.com/about/</guid>
+      <description>Hi, I&amp;rsquo;m Darius. This is my bit of space on the world wide web. I hope you enjoy it. By workday, I&amp;rsquo;m a SecOps Team Lead/Cloud Security Engineer. The rest of the time, I&amp;rsquo;m a husband, father, and tech enthusiast.
+The content on this site is where I chronicle my learning and share any projects I have been working on in the world of AWS, Python, Cybersecurity, and anything else I dabble in that should probably be documented.</description>
     </item>
     
   </channel>
