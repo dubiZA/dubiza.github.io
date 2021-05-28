@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Welcome... on Darius Hall</title>
-    <link>https://dariushall.com/</link>
-    <description>Recent content in Welcome... on Darius Hall</description>
+    <title>Posts on Darius Hall</title>
+    <link>https://dariushall.com/post/</link>
+    <description>Recent content in Posts on Darius Hall</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 May 2021 20:57:01 -0600</lastBuildDate><atom:link href="https://dariushall.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 May 2021 08:29:58 -0600</lastBuildDate><atom:link href="https://dariushall.com/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup</title>
       <link>https://dariushall.com/post/aws/securing-a-personal-aws-account/secure-multi-account-setup-part-1/</link>

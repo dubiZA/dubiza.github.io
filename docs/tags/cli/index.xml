@@ -6,14 +6,13 @@
     <description>Recent content in cli on Darius Hall</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Mon, 29 Mar 2021 16:24:16 -0600</lastBuildDate><atom:link href="https://dariushall.com/tags/cli/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Configuring the AWS CLI</title>
-      <link>https://dariushall.com/posts/2021/03/configuring-the-aws-cli/</link>
+      <link>https://dariushall.com/post/aws/configuring-the-aws-cli/</link>
       <pubDate>Mon, 29 Mar 2021 16:24:16 -0600</pubDate>
       
-      <guid>https://dariushall.com/posts/2021/03/configuring-the-aws-cli/</guid>
+      <guid>https://dariushall.com/post/aws/configuring-the-aws-cli/</guid>
       <description>Every time I set up a fresh install of an operating system as a result of a new computer or messing around with different OSes on existing systems, I end up having to set up the AWS CLI from scratch. I have multiple personal AWS accounts to use for learning and running services that I want on a more resilient platform than running them on a server at home. It&amp;rsquo;s always a pain to find the right doc pages for setting up the CLI with easy MFA assume role, so it&amp;rsquo;s time to document that here.</description>
     </item>
     

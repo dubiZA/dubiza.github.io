@@ -6,14 +6,40 @@
     <description>Recent content in Tags on Darius Hall</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 29 Mar 2021 16:24:16 -0600</lastBuildDate><atom:link href="https://dariushall.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 May 2021 20:57:01 -0600</lastBuildDate><atom:link href="https://dariushall.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>aws</title>
       <link>https://dariushall.com/tags/aws/</link>
-      <pubDate>Mon, 29 Mar 2021 16:24:16 -0600</pubDate>
+      <pubDate>Thu, 27 May 2021 20:57:01 -0600</pubDate>
       
       <guid>https://dariushall.com/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aws organizations</title>
+      <link>https://dariushall.com/tags/aws-organizations/</link>
+      <pubDate>Thu, 27 May 2021 20:57:01 -0600</pubDate>
+      
+      <guid>https://dariushall.com/tags/aws-organizations/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloud security</title>
+      <link>https://dariushall.com/tags/cloud-security/</link>
+      <pubDate>Thu, 27 May 2021 20:57:01 -0600</pubDate>
+      
+      <guid>https://dariushall.com/tags/cloud-security/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>reference</title>
+      <link>https://dariushall.com/tags/reference/</link>
+      <pubDate>Thu, 27 May 2021 20:57:01 -0600</pubDate>
+      
+      <guid>https://dariushall.com/tags/reference/</guid>
       <description></description>
     </item>
     
@@ -32,15 +58,6 @@
       <pubDate>Mon, 29 Mar 2021 16:24:16 -0600</pubDate>
       
       <guid>https://dariushall.com/tags/cli/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>reference</title>
-      <link>https://dariushall.com/tags/reference/</link>
-      <pubDate>Mon, 29 Mar 2021 16:24:16 -0600</pubDate>
-      
-      <guid>https://dariushall.com/tags/reference/</guid>
       <description></description>
     </item>
     
