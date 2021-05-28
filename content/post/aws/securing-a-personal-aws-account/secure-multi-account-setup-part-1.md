@@ -113,7 +113,9 @@ And with that, the account has a reasonably good level of protection. To recap w
   - Root user access keys have been deleted if they existed
   - No IAM users have been created in the root account
 
-Remember, the AWS Organization management account is not intended to be used for running workloads. This account should be locked down, without IAM users and roles that could get the account compromised. The Org management account can be considered as the weakest link in the multi-account architecture because some of the additional protection that can be added to member accounts do not work on the management account. So, keep it secret, keep it safe!
+Remember, the AWS Organization management account _is not intended to be used for running workloads_. This account should be locked down and be without IAM users and roles that could get the account compromised. The org management account can be considered one of the weakest links in a multi-account architecture because some of the additional guardrails that can be added to member accounts do not work on the management account. So, keep it secret, keep it safe!
+
+That concludes part 1 of this multi-part series. Stay tuned for part 2!
 
 
 [create-account]: https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/ "Create and Activate an AWS Account"
