@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Part 2 - AWS For Personal Use/Learning: Identity and Access Management | Darius Hall</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This is the second post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup  With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!">
+    <meta name="generator" content="Hugo 0.82.0" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.4fc0b62e4b82c997bb0041217cd6b979.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Part 2 - AWS For Personal Use/Learning: Identity and Access Management" />
+<meta property="og:description" content="This is the second post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup  With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dariushall.com/post/aws/securing-a-personal-aws-account/iam-personal-accounts-part-2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-28T21:26:09-06:00" />
+<meta property="article:modified_time" content="2021-05-28T21:26:09-06:00" /><meta property="og:site_name" content="Darius Hall" />
+
+<meta itemprop="name" content="Part 2 - AWS For Personal Use/Learning: Identity and Access Management">
+<meta itemprop="description" content="This is the second post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup  With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!"><meta itemprop="datePublished" content="2021-05-28T21:26:09-06:00" />
+<meta itemprop="dateModified" content="2021-05-28T21:26:09-06:00" />
+<meta itemprop="wordCount" content="1559">
+<meta itemprop="keywords" content="aws,reference,cloud security,aws iam,aws sso," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Part 2 - AWS For Personal Use/Learning: Identity and Access Management"/>
+<meta name="twitter:description" content="This is the second post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup  With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!"/>
+
+      
+    
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white production">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Darius Hall
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/post/" title="Posts page">
+              Posts
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+<a href="https://www.linkedin.com/in/dariushall/" target="_blank" class="link-transition linkedin link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" rel="noopener" aria-label="follow on LinkedIn——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+<a href="https://github.com/dubiZA" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l mr1" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=https://dariushall.com/post/aws/securing-a-personal-aws-account/iam-personal-accounts-part-2/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=https://dariushall.com/post/aws/securing-a-personal-aws-account/iam-personal-accounts-part-2/&amp;text=Part%202%20-%20AWS%20For%20Personal%20Use/Learning:%20Identity%20and%20Access%20Management" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://dariushall.com/post/aws/securing-a-personal-aws-account/iam-personal-accounts-part-2/&amp;title=Part%202%20-%20AWS%20For%20Personal%20Use/Learning:%20Identity%20and%20Access%20Management" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Part 2 - AWS For Personal Use/Learning: Identity and Access Management</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2021-05-28T21:26:09-06:00">May 28, 2021</time>
+
+      
+      
+        <span class="f6 mv4 dib tracked"> - 8 minutes read</span>
+        <span class="f6 mv4 dib tracked"> - 1559 words</span>
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p><em>This is the second post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:</em></p>
+<ul>
+<li><em><a href="https://dariushall.com/post/aws/securing-a-personal-aws-account/secure-multi-account-setup-part-1/" title="Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup">Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup</a></em></li>
+</ul>
+<p>With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!? Well, there are a couple of ways this could be approached. AWS recommends using a central identity store to efficiently manage users. This makes sense, especially in large organizations where there is typically more churn in the employee base. Additionally, there are generally two types of identities that might be required in AWS:</p>
+<ol>
+<li><strong>Humans</strong>: Think admins, developers, operators, etc. This is probably one of the most scary types of principals because they can think and often break things while actively looking for ways to make life easier for themselves 😜</li>
+<li><strong>Machines</strong>: The applications and workloads running in and dependant on the cloud resources in the various accounts. These are the less scary type of principal because they shut up, do what they&rsquo;re told and get in to far less trouble once they start working</li>
+</ol>
+<p>This write up is going to address the human kind of identity and leave the machines alone for now. In my mind, there are two ways to implement the best practice of using a central identity store.</p>
+<ol>
+<li>Create IAM roles in the various AWS accounts in the AWS Organization that can be assumed by principals in the org management account. The roles are scoped for least privilege. IAM users are then created in the org management account with only the rights to manage their own IAM properties, like password changes and MFA tokens, and with the ability to assume roles in other accounts. Their ability to assume roles would be limited to only those they need for their job function. Essentially, the management account is the central identity provider (IdP) - when a user leaves the company, there is one place to remove the user and access to all other AWS accounts is terminated with that removal</li>
+<li>Use a SAML 2.0 based IdP solution that can integrate with AWS (like Okta, PingIdentity, etc). The great thing here is that AWS provides it&rsquo;s own IdP solution in the form of AWS SSO (in fact, from what I can tell, even using external IdPs would require the use of AWS SSO). The benefit here is AWS SSO integrates tightly with AWS Organizations. Enabling AWS SSO in the org management account will make it a breeze to get working with all other accounts in the organization</li>
+</ol>
+<p>Now, I must be honest here, AWS SSO is a new service to me. I started out using option 1 with roles that get assumed by an IAM user in the org management account. But, AWS SSO just makes more sense. Given the updates to the <a href="https://aws.amazon.com/blogs/developer/aws-cli-v2-is-now-generally-available/" title="AWS CLI v2 release notes">AWS CLI with the v2 release</a> that now supports AWS SSO, and the ease of setup for multi-account access and implementing different types of MFA, it&rsquo;s silly to not use it.</p>
+<p>To get started, in the AWS Organizations management account (remember to sign in with the root user for the org management account if you are continuing this from part 1 and are not currently signed in. No IAM users were created in part 1, so the root user is the only option for signing in at this point):</p>
+<ul>
+<li>Navigate to the AWS SSO service</li>
+<li>AWS SSO is a regional service, so make sure the desired region is selected (us-east-1 for me)</li>
+<li>Click the &ldquo;Enable AWS SSO&rdquo; button on the landing page</li>
+</ul>
+<p><img src="/post/aws/securing-a-personal-aws-account/images/enable_sso.png" alt="Enabling SSO"></p>
+<ul>
+<li>I&rsquo;d recommend some additional configuration adjustments to AWS SSO next</li>
+<li>Click on &ldquo;Settings&rdquo; in the left-hand navigation</li>
+<li>Customize the &ldquo;User portal&rdquo; by changing the URL to something a little more meaningful</li>
+<li>Under the &ldquo;Mutli-factor authentication&rdquo; heading, click &ldquo;Configure&rdquo;</li>
+</ul>
+<p><img src="/post/aws/securing-a-personal-aws-account/images/aws_sso_mfa_pre_config.png" alt="AWS SSO Settings"></p>
+<ul>
+<li>Under the &ldquo;Users should be prompted for MFA&rdquo; make sure the &ldquo;Only when their sign-in context changes (context-aware)&rdquo; radio is selected. While I might be a security guy, I also believe that security should be as unobtrusive to the user experience as possible. Using this context aware MFA configuration will reduce some of the friction typically associated with MFA and short-lived access sessions</li>
+<li>Select whether only hardware backed MFA authenticator devices should be allowed or authenticator apps as well (while AWS CLI v2 does support the use of hardware tokens that don&rsquo;t generate TOTP codes, it could be wise to still allow authenticator apps to make sure all bases are covered. When using the CLI, if users aren&rsquo;t using v2, they will probably run in to usability issues if they are unable to provide an MFA TOTP code to the CLI)</li>
+<li>Under the &ldquo;If a user does not yet have a registered MFA device&rdquo; heading, select the &ldquo;Require them to register an MFA device at sign in&rdquo; radio. This will give users the ability to manage their own MFA device, and will ensure that if none is configured at first sign in, that they configure one before they are able to access anything else</li>
+</ul>
+<p><img src="/post/aws/securing-a-personal-aws-account/images/aws_sso_mfa_settings.png" alt="AWS SSO MFA Configuration"></p>
+<ul>
+<li>Implementing role-based access control (RBAC) can be accomplished by creating groups in AWS SSO, so in the left navigation click &ldquo;Groups&rdquo;</li>
+<li>Click the big blue &ldquo;Create Group&rdquo; button</li>
+<li>Fill in the details (I created an &ldquo;admin&rdquo; group here)</li>
+<li>Click create</li>
+</ul>
+<p><img src="/post/aws/securing-a-personal-aws-account/images/aws_sso_groups.png" alt="Create SSO Group"></p>
+<ul>
+<li>Create a new AWS SSO user by clicking &ldquo;Users&rdquo; in the left side navigation</li>
+<li>Click the big blue &ldquo;Add User&rdquo; button</li>
+<li>On the next screen, fill in the details and create</li>
+</ul>
+<p><img src="/post/aws/securing-a-personal-aws-account/images/aws_sso_users.png" alt="Create SSO User"></p>
+<ul>
+<li>To give AWS account level access to an SSO user, click the &ldquo;AWS accounts&rdquo; link in the left-hand navigation</li>
+<li>On the &ldquo;Permission sets&rdquo; tab, click the blue &ldquo;Create permission set&rdquo; button</li>
+</ul>
+<p><img src="/post/aws/securing-a-personal-aws-account/images/aws_accounts_permission_sets.png" alt="Create SSO Account Level Permission Set"></p>
+<ul>
+<li>For simplicity in this post, use one of the existing job function policies when prompted</li>
+</ul>
+<p><img src="/post/aws/securing-a-personal-aws-account/images/aws_sso_permission_set_precanned.png" alt="Create Pre-Configured Policy"></p>
+<ul>
+<li>To get a good balance between account access and least privilege, the PowerUserAccess policy should work well. Given this writeup is focused on creating a set of accounts for personal use, PowerUserAccess will grant access to just about every service that AdministratorAccess does, but does not include access to most IAM features. Users assigned this permission set won&rsquo;t be able to create, read, update or delete any IAM users, groups, etc.</li>
+<li>Feel free to add tags on the next screen</li>
+<li>Review the permission set configuration and create</li>
+</ul>
+<p><img src="/post/aws/securing-a-personal-aws-account/images/aws_sso_permission_set_policy.png" alt="Select Preexisting Policy"></p>
+<ul>
+<li>With the permission set created, click on the &ldquo;AWS organization&rdquo; tab</li>
+<li>Check the boxes next to the AWS accounts that the new SSO user should have access to</li>
+<li>Click the blue &ldquo;Assign users&rdquo; button</li>
+</ul>
+<p><img src="/post/aws/securing-a-personal-aws-account/images/aws_sso_account_user_assignment.png" alt="Assign AWS Account Access to User"></p>
+<ul>
+<li>To make adminstration easier, rather than assigning individual users, make sure to assign groups. On the &ldquo;Assign Users&rdquo; screen, click the &ldquo;Groups&rdquo; tab</li>
+<li>Select the SSO group created earlier, where the SSO user was already added to that group</li>
+</ul>
+<p><img src="/post/aws/securing-a-personal-aws-account/images/aws_sso_assign_group.png" alt="Assign SSO Group to Account"></p>
+<ul>
+<li>On the next screen, select the permission set created previously. This will associated that permission set with the SSO user group for the accounts that were selected</li>
+</ul>
+<p>With that, the SSO user should have everything needed to sign-in and get started with using the AWS accounts that were assigned. Users will be able to access the SSO portal using the user portal URL customized earlier. This can be tested by:</p>
+<ul>
+<li>Opening an incognito or private browsing window or using a different browser from the one currently signed in to AWS</li>
+<li>Navigating to the user portal URL</li>
+<li>Entering username and password (at user creation, an email would have been sent to the new user. If not already done, follow the link in the email to create a password for the user account. Right clicking the link in the email and opening in a private browsing window would be best or copying the link and using a different browser)</li>
+</ul>
+<p><img src="/post/aws/securing-a-personal-aws-account/images/aws_sso_signin_page.png" alt="SSO User Sign-In"></p>
+<ul>
+<li>On first sign-in the user will be prompted to enroll an MFA device</li>
+<li>Select the desired type of MFA device (the prompt will give the option of authenticator app like Authy, security key like a YubiKey and built-in authenticator when using a compatible device with a browser that has support). I&rsquo;d recommend the security key or authenticator app to avoid compatibility issues with the built-in authenticator (although multiple options could be enabled later to avoid the compatibility issue)</li>
+</ul>
+<p><img src="/post/aws/securing-a-personal-aws-account/images/aws_sso_mfa_user_config.png" alt="Add MFA device"></p>
+<p>And that&rsquo;s it. The SSO user should have a tile of sorts that says &ldquo;AWS Account (number of accounts they have access to)&rdquo;. Clicking on the tile will expand a list of the accounts they have access to. Clicking on one of those will drop down a sub-menu of sorts with a link to the AWS management console for browser-based access to the AWS account or, clicking the link that says &ldquo;Command line or programmatic access&rdquo; will present another screen with an AWS access key, secret access key and session token as well as directions for how to use those depending on the method of access (a *nix based shell or Windows PowerShell).</p>
+<p><img src="/post/aws/securing-a-personal-aws-account/images/aws_sso_post-sign-in.png" alt="AWS SSO Post Sign In Screen"></p>
+<p>There we have it. Any AWS accounts associated with the user created in this guide will now be able to access most of the services in AWS with a pretty high level of access. For now, a user with elevated access will be needed to complete tasks in the remainder of this series. Stay tuned for part 3 where AWS account level guardrails are discussed and implemented.</p>
+<ul class="pa0">
+  
+   <li class="list">
+     <a href="/tags/aws" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">aws</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/reference" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">reference</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/cloud-security" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">cloud security</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/aws-iam" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">aws iam</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/aws-sso" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">aws sso</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "dh-c" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/post/aws/securing-a-personal-aws-account/secure-multi-account-setup-part-1/">Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/post/aws/configuring-the-aws-cli/">Configuring the AWS CLI</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://dariushall.com" >
+    &copy;  Darius Hall 2021 
+  </a>
+    <div>
+
+
+
+
+
+
+
+<a href="https://www.linkedin.com/in/dariushall/" target="_blank" class="link-transition linkedin link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" rel="noopener" aria-label="follow on LinkedIn——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+<a href="https://github.com/dubiZA" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l mr1" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

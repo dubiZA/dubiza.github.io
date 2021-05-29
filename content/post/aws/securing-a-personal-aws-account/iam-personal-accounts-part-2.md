@@ -1,7 +1,7 @@
 ---
 title: "Part 2 - AWS For Personal Use/Learning: Identity and Access Management"
-date: 2021-05-28T20:40:09-06:00
-draft: true
+date: 2021-05-28T21:26:09-06:00
+draft: false
 tags:
   - aws
   - reference
@@ -9,10 +9,10 @@ tags:
   - aws iam
   - aws sso
 ---
-_This is the second post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning._
+_This is the second post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:_
+  - _[Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup][part-1]_
 
-# Identity and Access Management
-With everything locked down in this management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!? Well, there are a couple of ways this could be approached. AWS recommends using a central identity store to efficiently manage users. This makes sense, especially in large organizations where there typically more churn in the employee base. Additionally, there are generally two types of identities that might be required in AWS:
+With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!? Well, there are a couple of ways this could be approached. AWS recommends using a central identity store to efficiently manage users. This makes sense, especially in large organizations where there is typically more churn in the employee base. Additionally, there are generally two types of identities that might be required in AWS:
 
   1. **Humans**: Think admins, developers, operators, etc. This is probably one of the most scary types of principals because they can think and often break things while actively looking for ways to make life easier for themselves &#128540;
   2. **Machines**: The applications and workloads running in and dependant on the cloud resources in the various accounts. These are the less scary type of principal because they shut up, do what they're told and get in to far less trouble once they start working
@@ -24,7 +24,7 @@ This write up is going to address the human kind of identity and leave the machi
 
 Now, I must be honest here, AWS SSO is a new service to me. I started out using option 1 with roles that get assumed by an IAM user in the org management account. But, AWS SSO just makes more sense. Given the updates to the [AWS CLI with the v2 release][aws-cli2] that now supports AWS SSO, and the ease of setup for multi-account access and implementing different types of MFA, it's silly to not use it.
 
-To get started, in the AWS Organizations management account:
+To get started, in the AWS Organizations management account (remember to sign in with the root user for the org management account if you are continuing this from part 1 and are not currently signed in. No IAM users were created in part 1, so the root user is the only option for signing in at this point):
 
   - Navigate to the AWS SSO service
   - AWS SSO is a regional service, so make sure the desired region is selected (us-east-1 for me)
@@ -39,8 +39,8 @@ To get started, in the AWS Organizations management account:
 
 ![AWS SSO Settings](/post/aws/securing-a-personal-aws-account/images/aws_sso_mfa_pre_config.png)
 
-  - Under the "Users should be prompted for MFA" make sure the "Only when their sign-in context changes (context-aware)" radio is selected. While I might be a security guy, I also believe that security should be as unobtrusive to the user experience as possible. Using this context aware MFA configuration will reduce some of the friction typically associated with MFA and short-lived access session
-  - Select whether only hardware backed MFA authenticator devices should be allowed or authenticator apps as well (while AWS CLI v2 does support the user of hardware tokens that don't generate TOTP codes, it could be wise to still allow authenticator apps to make sure all bases are covered. When using the CLI, if users aren't using v2, they will probably run in to usability issues if they are unable to provide an MFA TOTP code to the CLI)
+  - Under the "Users should be prompted for MFA" make sure the "Only when their sign-in context changes (context-aware)" radio is selected. While I might be a security guy, I also believe that security should be as unobtrusive to the user experience as possible. Using this context aware MFA configuration will reduce some of the friction typically associated with MFA and short-lived access sessions
+  - Select whether only hardware backed MFA authenticator devices should be allowed or authenticator apps as well (while AWS CLI v2 does support the use of hardware tokens that don't generate TOTP codes, it could be wise to still allow authenticator apps to make sure all bases are covered. When using the CLI, if users aren't using v2, they will probably run in to usability issues if they are unable to provide an MFA TOTP code to the CLI)
   - Under the "If a user does not yet have a registered MFA device" heading, select the "Require them to register an MFA device at sign in" radio. This will give users the ability to manage their own MFA device, and will ensure that if none is configured at first sign in, that they configure one before they are able to access anything else
 
 ![AWS SSO MFA Configuration](/post/aws/securing-a-personal-aws-account/images/aws_sso_mfa_settings.png)
@@ -67,7 +67,7 @@ To get started, in the AWS Organizations management account:
 
 ![Create Pre-Configured Policy](/post/aws/securing-a-personal-aws-account/images/aws_sso_permission_set_precanned.png)
 
-  - To get a good balance between account access and least privilege, the PowerUserAccess policy should work well. Given this writeup is focused on creating an set of accounts for personal use, PowerUserAccess will grant access to just about every service that AdministratorAccess does, but does not include access to most IAM features. Users assigned this permission set won't be able to create, read, update or delete any IAM users, groups, etc.
+  - To get a good balance between account access and least privilege, the PowerUserAccess policy should work well. Given this writeup is focused on creating a set of accounts for personal use, PowerUserAccess will grant access to just about every service that AdministratorAccess does, but does not include access to most IAM features. Users assigned this permission set won't be able to create, read, update or delete any IAM users, groups, etc.
   - Feel free to add tags on the next screen
   - Review the permission set configuration and create
 
@@ -99,9 +99,11 @@ With that, the SSO user should have everything needed to sign-in and get started
 
 ![Add MFA device](/post/aws/securing-a-personal-aws-account/images/aws_sso_mfa_user_config.png)
 
-And that's it. The SSO user should have a tile of sorts that says AWS Account (number of accounts they have access to). Clicking on the tile will expand a list of the accounts they have access to. Clicking on one of those will drop down a sub-menu of sorts with a link to the AWS management console for browser-based access to the AWS account or. Clicking the link that says "Command line or programmatic access" will present another screen with an AWS access key, secret access key and session token as well as directions for how to use those depending on the method of access (a *nix based shell or Windows PowerShell).
+And that's it. The SSO user should have a tile of sorts that says "AWS Account (number of accounts they have access to)". Clicking on the tile will expand a list of the accounts they have access to. Clicking on one of those will drop down a sub-menu of sorts with a link to the AWS management console for browser-based access to the AWS account or, clicking the link that says "Command line or programmatic access" will present another screen with an AWS access key, secret access key and session token as well as directions for how to use those depending on the method of access (a *nix based shell or Windows PowerShell).
 
 ![AWS SSO Post Sign In Screen](/post/aws/securing-a-personal-aws-account/images/aws_sso_post-sign-in.png)
 
+There we have it. Any AWS accounts associated with the user created in this guide will now be able to access most of the services in AWS with a pretty high level of access. For now, a user with elevated access will be needed to complete tasks in the remainder of this series. Stay tuned for part 3 where AWS account level guardrails are discussed and implemented.
 
+[part-1]: https://dariushall.com/post/aws/securing-a-personal-aws-account/secure-multi-account-setup-part-1/ "Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup"
 [aws-cli2]: https://aws.amazon.com/blogs/developer/aws-cli-v2-is-now-generally-available/ "AWS CLI v2 release notes"
