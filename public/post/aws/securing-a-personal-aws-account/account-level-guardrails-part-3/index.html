@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Part 3 - AWS For Personal Use/Learning: Account Level Guardrails | Darius Hall</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach.">
+    <meta name="generator" content="Hugo 0.83.1" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.4fc0b62e4b82c997bb0041217cd6b979.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Part 3 - AWS For Personal Use/Learning: Account Level Guardrails" />
+<meta property="og:description" content="This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/" /><meta property="article:section" content="post" />
+
+<meta property="og:site_name" content="Darius Hall" />
+
+<meta itemprop="name" content="Part 3 - AWS For Personal Use/Learning: Account Level Guardrails">
+<meta itemprop="description" content="This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach.">
+
+<meta itemprop="wordCount" content="1981">
+<meta itemprop="keywords" content="aws,reference,cloud security,aws iam,aws scp,aws organizations," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Part 3 - AWS For Personal Use/Learning: Account Level Guardrails"/>
+<meta name="twitter:description" content="This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach."/>
+
+      
+    
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white production">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Darius Hall
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/post/" title="Posts page">
+              Posts
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+<a href="https://www.linkedin.com/in/dariushall/" target="_blank" class="link-transition linkedin link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" rel="noopener" aria-label="follow on LinkedIn——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+<a href="https://github.com/dubiZA" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l mr1" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/&amp;text=Part%203%20-%20AWS%20For%20Personal%20Use/Learning:%20Account%20Level%20Guardrails" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/&amp;title=Part%203%20-%20AWS%20For%20Personal%20Use/Learning:%20Account%20Level%20Guardrails" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Part 3 - AWS For Personal Use/Learning: Account Level Guardrails</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="0001-01-01T00:00:00Z">January 1, 0001</time>
+
+      
+      
+        <span class="f6 mv4 dib tracked"> - 10 minutes read</span>
+        <span class="f6 mv4 dib tracked"> - 1981 words</span>
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p><em>This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:</em></p>
+<ul>
+<li><em><a href="https://dariushall.com/post/aws/securing-a-personal-aws-account/secure-multi-account-setup-part-1/" title="Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup">Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup</a></em></li>
+<li><em><a href="https://dariushall.com/post/aws/securing-a-personal-aws-account/iam-personal-accounts-part-2/" title="Part 2 - AWS For Personal Use/Learning: Identity and Access Management">Part 2 - AWS For Personal Use/Learning: Identity and Access Management</a></em></li>
+</ul>
+<p>So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach. At least two accounts exist in the organization (see part 1 for my account architecture which, at present, includes 4 accounts with distinct roles in the AWS Organization) and human access has been enabled through the use of AWS SSO. Least privilege for said human access has been through the use of SSO user groups and permission sets associated with the AWS accounts and SSO users/groups. That is a great baseline, especially for individual, human user based access, however, control can be tightened up even more at an account level.</p>
+<p>The AWS Organizations service introduced many ways to enable a streamlined approach to managing and governing a multi-account AWS architecture. Organizations supports two general feature sets to users of the service:</p>
+<ul>
+<li>Consolidated Billing, which is a limited subset of the full AWS Organizations feature set. It provides an easier way to manage, view and receive bills for a multi-account environment</li>
+<li>All features, which includes the Consolidated Billing functionality and several other enhancements like Service Control Policies, Tagging Policies, and other advanced management functionality</li>
+</ul>
+<p>This post, as the title suggests, is focused on applying account level &ldquo;guardrails&rdquo; against accounts in the AWS Organization using the Service Control Policies (SCP) feature.</p>
+<h2 id="scps-overview-and-enabling">SCPs: Overview and Enabling</h2>
+<p>Services in AWS are all the high-level things you can use in an AWS account. EC2, S3, CloudFormation, CloudTrail, SageMaker are some examples of the 250+ services. As the name Service Control Policies suggest, these policies control access to the service.</p>
+<p>It might be important to note that they do not grant access to services in an account by themselves. In other words, if there are no IAM identities in an account, applying the default AWS managed SCP <code>FullAWSAccess</code> would do nothing. In fact, even if there was an IAM principal, but that principal had no IAM policies attached to it, the SCP would still not take effect.</p>
+<p>So, if SCPs don&rsquo;t do anything by themselves, how do they work? They provide a way of controlling the maximum permissions that can be applied to an IAM principal (user or role) by an IAM access policy. I&rsquo;m not going to go in to detail about how AWS evaluates effective permissions - <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html" title="AWS Policy Evaluation Logic">the AWS docs have a great explanation of the logic behind policy evaluations</a> (it turns out that depending on the service, there could be up to 5 different types of policies that determine final effective permissions).</p>
+<p>Before moving on, it is really important to point out that SCPs have absolutely no effect on the organization management account. Any SCPs attached to the root organizational unit or directly to the management account will do nothing to limit the access that can be assigned to IAM identities (users or roles) and root user. Access for identities in the management account can only be controlled through IAM policies. This behavior, I believe is intended to prevent locking one&rsquo;s self out of their entire account architecture.</p>
+<h3 id="enabling-scps">Enabling SCPs</h3>
+<p>With AWS Organizations enabled, Service Control Polices can be turned on from within the AWS Organizations Management Console view.</p>
+<ul>
+<li>In the AWS Org Management Console left side navigation, click &ldquo;Policies&rdquo;</li>
+<li>On the &ldquo;Policies&rdquo; page, click the link for &ldquo;Service Control Policies&rdquo;</li>
+</ul>
+<p><img src="/post/aws/securing-a-personal-aws-account/images/aws_scp_policies_page.png" alt="Enable SCPs"></p>
+<ul>
+<li>The top right of the SCP page should show a button that allows it to be enabled if it is not already enabled (again, my accounts has been around for several months now and much of what I&rsquo;m demonstrating was done by me months ago so I don&rsquo;t have exact deployment/enable screenshots and information. AWS docs are generally good enough to answer questions that might come up)</li>
+</ul>
+<p><img src="/post/aws/securing-a-personal-aws-account/images/aws_scp_full_access.png" alt="Enable SCPs"></p>
+<h2 id="service-control-policy-strategies">Service Control Policy Strategies</h2>
+<p>Now that SCPs are enabled, there are a couple of strategies to think about on how to use them. Much like firewalls, for those in the networking world, SCPs (and IAM policies) have an implicit deny if there is no policy statement explicitly allowing a service (or API action for IAM).</p>
+<p>The first strategy for SCPs then, would be an allow list model. By default, AWS attaches a managed SCP to the root Organizational Unit (OU) in the AWS Organization. The managed SCP is called <code>FullAWSAccess</code>. To use the allow list model, it would be necessary to detach the <code>FullAWSAccess</code> policy from the root OU. Doing so would result in that implicit deny taking effect. Any service that needs to be used in any given member account would need to explicitly be allowed through an SCP attached to the OU or account. This can be an effect way to really lock down the account, however, the draw back is it doesn&rsquo;t scale well. If only a handful of services will ever be used, this could be a great strategy.</p>
+<p>The second strategy would be a deny list model. Deny listing is the default configuration AWS applies when enabling SCPs by attaching the above mentioned <code>FullAWSAccess</code> managed policy - a * on * policy that allows all actions on all services. The deny model can be more difficult to lock down, but scales much better when there is a solid understanding of how AWS is used in an organization. In the personal use scenario for AWS accounts, I&rsquo;d venture to say this deny model makes the most sense as it gives the freedom to learn how to use services without needing to go and add each service to an allow list. It does allow us to configure some guardrails that can help reduce the hurt if we end up screwing up at some point and leak access keys, or spin up a server we didn&rsquo;t mean to, etc.</p>
+<h2 id="suggested-guardrails-for-personal-use-accounts">Suggested Guardrails For Personal Use Accounts</h2>
+<p>Which strategy one ends up using is up to the user/organization. I went with the deny list approach to make things a bit easier on myself. Having said that, I&rsquo;ve read enough horror stories of people trying to learn AWS inadvertently racking up thousands of dollars in service charges either through their own mistake or account compromise (arguably also their own mistake).</p>
+<p>To mitigate some of the risk of screwing up and account compromise, using SCPs to limit access in some key areas is a great idea. Here I have a few suggestions, one of which will work very well with the next part in the series and using GuardDuty for intelligent threat detection in cases of account compromise.</p>
+<h3 id="limiting-regions">Limiting Regions</h3>
+<p>The first suggested guardrail I&rsquo;d strongly recommend for a personal use environment (even enterprise use can benefit from this!) is locking down regions that can be used to deploy services. It is much too easy for a new user to inadvertently deploy a bunch of infrastructure to a region they don&rsquo;t typically use or didn&rsquo;t mean to use. People do this all the time and then forget about it because they never use the region again and forget to clean up. This is one of the most common ways personal account users rack up high bills in AWS. Typically, AWS is really nice about waiving bills from PEBKAC issues, but it&rsquo;s much easier to avoid those in the first place.</p>
+<p>Another benefit to limiting regions is that it makes it that much harder to miss account compromise. When an AWS account is pwned, attackers will often spin up infrastructure in regions that don&rsquo;t have anything going on so as to fly under the radar as much as possible. By disabling regions that are known to not be used and needed, this can be prevented. Region limiting, in conjunction with the GuardDuty service can enable a rather effective means of rapid detection and response in a case of account (and even compute) compromise.</p>
+<p>My recommendations for limiting regions would be to use the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_examples.html#examples_general" title="Example SCPs - Region">sample SCP</a> provided by AWS in the SCP docs (see below). The policy can be/needs to be tweaked a bit to make it work for you. The policy would work in conjunction with the default <code>FullAWSAccess</code> SCP. The action is to <code>deny</code> access to all resources where the <code>aws:RequestedRegion</code> (see the condition statement) is not an approved region. The policy provides a means of adding exempt principals (IAM roles or users) that should still be able to use all regions. This condition could be removed. Additionally, because there are a number of global services that have their endpoints based in the <code>us-east-1</code> region, the policy also includes a <code>NotAction</code> statement in the <code>deny</code> statement.</p>
+<pre><code>  {
+      &quot;Version&quot;: &quot;2012-10-17&quot;,
+      &quot;Statement&quot;: [
+          {
+              &quot;Sid&quot;: &quot;DenyAllOutsideEU&quot;,
+              &quot;Effect&quot;: &quot;Deny&quot;,
+              &quot;NotAction&quot;: [
+                  &quot;a4b:*&quot;,
+                  &quot;acm:*&quot;,
+                  &quot;aws-marketplace-management:*&quot;,
+                  &quot;aws-marketplace:*&quot;,
+                  &quot;aws-portal:*&quot;,
+                  &quot;awsbillingconsole:*&quot;,
+                  &quot;budgets:*&quot;,
+                  &quot;ce:*&quot;,
+                  &quot;chime:*&quot;,
+                  &quot;cloudfront:*&quot;,
+                  &quot;config:*&quot;,
+                  &quot;cur:*&quot;,
+                  &quot;directconnect:*&quot;,
+                  &quot;ec2:DescribeRegions&quot;,
+                  &quot;ec2:DescribeTransitGateways&quot;,
+                  &quot;ec2:DescribeVpnGateways&quot;,
+                  &quot;fms:*&quot;,
+                  &quot;globalaccelerator:*&quot;,
+                  &quot;health:*&quot;,
+                  &quot;iam:*&quot;,
+                  &quot;importexport:*&quot;,
+                  &quot;kms:*&quot;,
+                  &quot;mobileanalytics:*&quot;,
+                  &quot;networkmanager:*&quot;,
+                  &quot;organizations:*&quot;,
+                  &quot;pricing:*&quot;,
+                  &quot;route53:*&quot;,
+                  &quot;route53domains:*&quot;,
+                  &quot;s3:GetAccountPublic*&quot;,
+                  &quot;s3:ListAllMyBuckets&quot;,
+                  &quot;s3:PutAccountPublic*&quot;,
+                  &quot;shield:*&quot;,
+                  &quot;sts:*&quot;,
+                  &quot;support:*&quot;,
+                  &quot;trustedadvisor:*&quot;,
+                  &quot;waf-regional:*&quot;,
+                  &quot;waf:*&quot;,
+                  &quot;wafv2:*&quot;,
+                  &quot;wellarchitected:*&quot;
+              ],
+              &quot;Resource&quot;: &quot;*&quot;,
+              &quot;Condition&quot;: {
+                  &quot;StringNotEquals&quot;: {
+                      &quot;aws:RequestedRegion&quot;: [
+                          &quot;eu-central-1&quot;,
+                          &quot;eu-west-1&quot;
+                      ]
+                  },
+                  &quot;ArnNotLike&quot;: {
+                      &quot;aws:PrincipalARN&quot;: [
+                          &quot;arn:aws:iam::*:role/Role1AllowedToBypassThisSCP&quot;,
+                          &quot;arn:aws:iam::*:role/Role2AllowedToBypassThisSCP&quot;
+                      ]
+                  }
+              }
+          }
+      ]
+  }
+</code></pre>
+<h3 id="limiting-ec2-instance-types">Limiting EC2 Instance Types</h3>
+<p>I made the decision in my AWS accounts to limit the type of EC2 instances that can be launched. The intention here was to make sure that I could only use instance types in the free tier of service and prevent mistakenly spinning something up that is bigger and more expensive and then forgetting to terminate the instance. Again, with this statement, it is an explicit <code>deny</code> to work with the deny list model suggested above. Any run instance API call to the EC2 service where the specified EC instance type is not <code>t2.micro</code> will be blocked.</p>
+<pre><code>    {
+      &quot;Version&quot;: &quot;2012-10-17&quot;,
+      &quot;Statement&quot;: [
+        {
+          &quot;Sid&quot;: &quot;RequireMicroInstanceType&quot;,
+          &quot;Effect&quot;: &quot;Deny&quot;,
+          &quot;Action&quot;: &quot;ec2:RunInstances&quot;,
+          &quot;Resource&quot;: [
+            &quot;arn:aws:ec2:*:*:instance/*&quot;
+          ],
+          &quot;Condition&quot;: {
+            &quot;StringNotEquals&quot;: {
+              &quot;ec2:InstanceType&quot;: &quot;t2.micro&quot;
+            }
+          }
+        }
+      ]
+    }
+</code></pre>
+<h3 id="other-options-for-scps">Other Options for SCPs</h3>
+<p>I highly recommend viewing the [SCPs examples][example-scp] in the docs. There are a number of other SCPs that can be combined in to a &ldquo;baseline&rdquo; SCP that could then be applied to the root OU. I should point out that AWS does not recommend attaching new deny policies to the root OU right off the bat as there could be unintended consequences. I&rsquo;d definitely agree with that in a working, enterprise production account setup. In this case, where the accounts are likely new and being used only for personal use, it&rsquo;s a bit safer to just go ahead with it. The SCP will not affect the org management account, so in this personal use use case, it&rsquo;s a quicker thing to just go an make a change if there are unintended consequences.</p>
+<p>Some suggestions from the example SCPs would be to:</p>
+<ul>
+<li>Deny IAM identities from making changes to admin roles (in the case where a cross-account role was added when creating new org member accounts)</li>
+<li>Denying org member accounts the ability to leave the organization</li>
+<li>Denying or member accounts the ability to disable GuardDuty (part 4 of this series will look at turning GuardDuty on)</li>
+</ul>
+<p>Currently, I&rsquo;m only using the policies to block undesired regions and EC2 instances, however, I will be experimenting with a new baseline SCP which I&rsquo;ll included here with a later update when I have it working. At this point, I think we can call this post done though. AWS has been configured with some great initial baseline security measures. The addition of SCPs will add some useful guardrails to prevent member accounts from being used in ways that are not desired. Next steps are to set up GuardDuty and an alerting mechanism for when GuardDuty finds something weird. Stay tuned for part 4!</p>
+<ul class="pa0">
+  
+   <li class="list">
+     <a href="/tags/aws" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">aws</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/reference" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">reference</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/cloud-security" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">cloud security</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/aws-iam" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">aws iam</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/aws-scp" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">aws scp</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/aws-organizations" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">aws organizations</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "dh-c" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">What&#39;s in this post</p>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#scps-overview-and-enabling">SCPs: Overview and Enabling</a>
+      <ul>
+        <li><a href="#enabling-scps">Enabling SCPs</a></li>
+      </ul>
+    </li>
+    <li><a href="#service-control-policy-strategies">Service Control Policy Strategies</a></li>
+    <li><a href="#suggested-guardrails-for-personal-use-accounts">Suggested Guardrails For Personal Use Accounts</a>
+      <ul>
+        <li><a href="#limiting-regions">Limiting Regions</a></li>
+        <li><a href="#limiting-ec2-instance-types">Limiting EC2 Instance Types</a></li>
+        <li><a href="#other-options-for-scps">Other Options for SCPs</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/post/aws/securing-a-personal-aws-account/iam-personal-accounts-part-2/">Part 2 - AWS For Personal Use/Learning: Identity and Access Management</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/post/aws/securing-a-personal-aws-account/secure-multi-account-setup-part-1/">Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/post/aws/configuring-the-aws-cli/">Configuring the AWS CLI</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://dariushall.com" >
+    &copy;  Darius Hall 2021 
+  </a>
+    <div>
+
+
+
+
+
+
+
+<a href="https://www.linkedin.com/in/dariushall/" target="_blank" class="link-transition linkedin link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" rel="noopener" aria-label="follow on LinkedIn——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+<a href="https://github.com/dubiZA" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l mr1" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

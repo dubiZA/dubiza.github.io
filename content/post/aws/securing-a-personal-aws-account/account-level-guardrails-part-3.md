@@ -1,7 +1,7 @@
 ---
 title: "Part 3 - AWS For Personal Use/Learning: Account Level Guardrails"
-date: 2021-05-29T07:05:01-06:00
-draft: true
+date: 2021-06-2T07:07:01-06:00
+draft: false
 toc: true
 tags:
   - aws
