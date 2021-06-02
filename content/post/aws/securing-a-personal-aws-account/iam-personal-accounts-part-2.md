@@ -2,19 +2,22 @@
 title: "Part 2 - AWS For Personal Use/Learning: Identity and Access Management"
 date: 2021-05-28T21:26:09-06:00
 draft: false
+toc: true
 tags:
   - aws
   - reference
   - cloud security
   - aws iam
   - aws sso
+  - aws organizations
 ---
 _This is the second post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:_
   - _[Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup][part-1]_
+  - _[Part 3 - AWS For Personal Use/Learning: Account Level Guardrails][part-3]_
 
 With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!? Well, there are a couple of ways this could be approached. AWS recommends using a central identity store to efficiently manage users. This makes sense, especially in large organizations where there is typically more churn in the employee base. Additionally, there are generally two types of identities that might be required in AWS:
 
-  1. **Humans**: Think admins, developers, operators, etc. This is probably one of the most scary types of principals because they can think and often break things while actively looking for ways to make life easier for themselves &#128540;
+  1. **Humans**: Think admins, developers, operators, etc. This is probably one of the most scary types of identities because they can think and often break things while actively looking for ways to make life easier for themselves &#128540;
   2. **Machines**: The applications and workloads running in and dependant on the cloud resources in the various accounts. These are the less scary type of principal because they shut up, do what they're told and get in to far less trouble once they start working
 
 This write up is going to address the human kind of identity and leave the machines alone for now. In my mind, there are two ways to implement the best practice of using a central identity store.
@@ -105,5 +108,8 @@ And that's it. The SSO user should have a tile of sorts that says "AWS Account (
 
 There we have it. Any AWS accounts associated with the user created in this guide will now be able to access most of the services in AWS with a pretty high level of access. For now, a user with elevated access will be needed to complete tasks in the remainder of this series. Stay tuned for part 3 where AWS account level guardrails are discussed and implemented.
 
+**Update 5/29/2021**: Using the `PowerUserAccess` permission set will prevent users from accessing AWS Organizations in any meaningful way. Keep this in mind given part 3 of the series will be working with SCPs. Consider creating an SSO user with more permissive access but limiting use of this user as much as possible (only use it when needing to perform IAM, AWS SSO and AWS Organization actions for example).
+
 [part-1]: https://dariushall.com/post/aws/securing-a-personal-aws-account/secure-multi-account-setup-part-1/ "Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup"
+[part-3]: https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/ "Part 3 - AWS For Personal Use/Learning: Account Level Guardrails"
 [aws-cli2]: https://aws.amazon.com/blogs/developer/aws-cli-v2-is-now-generally-available/ "AWS CLI v2 release notes"

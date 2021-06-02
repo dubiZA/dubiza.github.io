@@ -7,8 +7,8 @@
     <title>Part 2 - AWS For Personal Use/Learning: Identity and Access Management | Darius Hall</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="This is the second post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup  With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!">
-    <meta name="generator" content="Hugo 0.82.0" />
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 3 - AWS For Personal Use/Learning: Account Level Guardrails  With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!">
+    <meta name="generator" content="Hugo 0.83.1" />
     
     
       <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
@@ -30,7 +30,7 @@
     
     <meta property="og:title" content="Part 2 - AWS For Personal Use/Learning: Identity and Access Management" />
 <meta property="og:description" content="This is the second post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup  With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!" />
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 3 - AWS For Personal Use/Learning: Account Level Guardrails  With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dariushall.com/post/aws/securing-a-personal-aws-account/iam-personal-accounts-part-2/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-05-28T21:26:09-06:00" />
@@ -38,13 +38,13 @@
 
 <meta itemprop="name" content="Part 2 - AWS For Personal Use/Learning: Identity and Access Management">
 <meta itemprop="description" content="This is the second post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup  With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!"><meta itemprop="datePublished" content="2021-05-28T21:26:09-06:00" />
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 3 - AWS For Personal Use/Learning: Account Level Guardrails  With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!"><meta itemprop="datePublished" content="2021-05-28T21:26:09-06:00" />
 <meta itemprop="dateModified" content="2021-05-28T21:26:09-06:00" />
-<meta itemprop="wordCount" content="1559">
-<meta itemprop="keywords" content="aws,reference,cloud security,aws iam,aws sso," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="wordCount" content="1637">
+<meta itemprop="keywords" content="aws,reference,cloud security,aws iam,aws sso,aws organizations," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Part 2 - AWS For Personal Use/Learning: Identity and Access Management"/>
 <meta name="twitter:description" content="This is the second post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup  With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!"/>
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 3 - AWS For Personal Use/Learning: Account Level Guardrails  With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!"/>
 
       
     
@@ -178,16 +178,17 @@
       
       
         <span class="f6 mv4 dib tracked"> - 8 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 1559 words</span>
+        <span class="f6 mv4 dib tracked"> - 1637 words</span>
       
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p><em>This is the second post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:</em></p>
 <ul>
 <li><em><a href="https://dariushall.com/post/aws/securing-a-personal-aws-account/secure-multi-account-setup-part-1/" title="Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup">Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup</a></em></li>
+<li><em><a href="https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/" title="Part 3 - AWS For Personal Use/Learning: Account Level Guardrails">Part 3 - AWS For Personal Use/Learning: Account Level Guardrails</a></em></li>
 </ul>
 <p>With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!? Well, there are a couple of ways this could be approached. AWS recommends using a central identity store to efficiently manage users. This makes sense, especially in large organizations where there is typically more churn in the employee base. Additionally, there are generally two types of identities that might be required in AWS:</p>
 <ol>
-<li><strong>Humans</strong>: Think admins, developers, operators, etc. This is probably one of the most scary types of principals because they can think and often break things while actively looking for ways to make life easier for themselves 😜</li>
+<li><strong>Humans</strong>: Think admins, developers, operators, etc. This is probably one of the most scary types of identities because they can think and often break things while actively looking for ways to make life easier for themselves 😜</li>
 <li><strong>Machines</strong>: The applications and workloads running in and dependant on the cloud resources in the various accounts. These are the less scary type of principal because they shut up, do what they&rsquo;re told and get in to far less trouble once they start working</li>
 </ol>
 <p>This write up is going to address the human kind of identity and leave the machines alone for now. In my mind, there are two ways to implement the best practice of using a central identity store.</p>
@@ -273,6 +274,7 @@
 <p>And that&rsquo;s it. The SSO user should have a tile of sorts that says &ldquo;AWS Account (number of accounts they have access to)&rdquo;. Clicking on the tile will expand a list of the accounts they have access to. Clicking on one of those will drop down a sub-menu of sorts with a link to the AWS management console for browser-based access to the AWS account or, clicking the link that says &ldquo;Command line or programmatic access&rdquo; will present another screen with an AWS access key, secret access key and session token as well as directions for how to use those depending on the method of access (a *nix based shell or Windows PowerShell).</p>
 <p><img src="/post/aws/securing-a-personal-aws-account/images/aws_sso_post-sign-in.png" alt="AWS SSO Post Sign In Screen"></p>
 <p>There we have it. Any AWS accounts associated with the user created in this guide will now be able to access most of the services in AWS with a pretty high level of access. For now, a user with elevated access will be needed to complete tasks in the remainder of this series. Stay tuned for part 3 where AWS account level guardrails are discussed and implemented.</p>
+<p><strong>Update 5/29/2021</strong>: Using the <code>PowerUserAccess</code> permission set will prevent users from accessing AWS Organizations in any meaningful way. Keep this in mind given part 3 of the series will be working with SCPs. Consider creating an SSO user with more permissive access but limiting use of this user as much as possible (only use it when needing to perform IAM, AWS SSO and AWS Organization actions for example).</p>
 <ul class="pa0">
   
    <li class="list">
@@ -293,6 +295,10 @@
   
    <li class="list">
      <a href="/tags/aws-sso" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">aws sso</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/aws-organizations" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">aws organizations</a>
    </li>
   
 </ul>
@@ -323,7 +329,10 @@
       </div>
     </div>
 
-    <aside class="w-30-l mt6-l">
+    <aside class="w-30-l mt6-l"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">What&#39;s in this post</p>
+      <nav id="TableOfContents"></nav>
+  </div>
 
 
 

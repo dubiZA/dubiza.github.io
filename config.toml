@@ -11,6 +11,12 @@ googleAnalytics = ""
 enableRobotsTXT = true
 disqusShortname = "dh-c"
 
+[module]
+
+  [[module.imports]]
+    path = "github.com/theNewDynamic/gohugo-theme-ananke"
+
+
 [languages]
   [languages.en]
     title = "Darius Hall"

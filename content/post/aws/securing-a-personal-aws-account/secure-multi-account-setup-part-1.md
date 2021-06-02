@@ -2,6 +2,7 @@
 title: "Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup"
 date: 2021-05-27T20:57:01-06:00
 draft: false
+toc: true
 tags:
   - aws
   - reference
@@ -10,6 +11,7 @@ tags:
 ---
 _This is the first post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:_
   - _[Part 2 - AWS For Personal Use/Learning: Identity and Access Management][part-2]_
+  - _[Part 3 - AWS For Personal Use/Learning: Account Level Guardrails][part-3]_
 
 The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or work with AWS; until you dig in and actually start experimenting, it's not going to become a persistent skill. AWS is an incredible platform that is growing and innovating as a Cloud Services Provider in amazing ways. There are over 250 services available through AWS, and that list grows bigger every year.
 
@@ -35,7 +37,7 @@ _I should point out that, because I have already had my AWS accounts running for
 
 _I should also make mention of [AWS Control Tower][control-tower] which is probably a better way to do all this, but involves a service or two that add costs I'd rather not incur for personal use._
 
-# Account Architecture
+## Account Architecture
 As mentioned above, AWS recommends taking a multi-account approach to using AWS. As such, AWS Organizations was introduced some time ago to facilitate easier management of a multi-account architecture. Many of AWS's services integrate with Organizations for easier deployment across multiple accounts (services like GuardDuty, AWS SSO, CloudTrail, etc).
 
 I currently have four active AWS accounts:
@@ -47,7 +49,7 @@ I currently have four active AWS accounts:
 
 ![Account Architecture](/post/aws/securing-a-personal-aws-account/images/account_architecture.png)
 
-## Overview of My Account Roles
+### Overview of My Account Roles
 The org management account is used for almost nothing. It's main purpose is to be the gatekeeper and facilitator of AWS Organizations and the security and governance tools that are applied to the rest of the accounts in the organization. This includes thinks like enabling an org-wide CloudTrail log trail, Service Control Policies, Tagging Policies and being the "identity" account for AWS SSO.
 
 No workloads are executed from this account. No compute, storage, networking or any other services are used for running applications, learning new things (unless they are AWS Organizations related). In my org management account, there are no IAM roles or IAM users.
@@ -60,7 +62,7 @@ The learning account is what I have for learning new cloud things. The intention
 
 There are some accounts that I do not yet have, but would like to add soon. One of those would be a centralized logging account where all CloudTrail, GuardDuty, and any other important log that might need longer term storage can go. This account would be locked down and hardened as much as possible to protect the integrity of the logs. I might also look at adding accounts to simulate production and development accounts, accounts that meet other compliance requirements like HIPPA, PCI, etc. But for now, I'm running with the four accounts listed above. As I continue to learn and understand more about AWS and best practices, things will develop and change.
 
-## Adding Accounts
+### Adding Accounts
 As mentioned above, my accounts have been running for a while, so this does not aim to show how to create the initial management account, nor does it show how to enable AWS Organizations. Following AWS's documentation to accomplish those two steps would be best.
 
 Once the initial management account is created and Organizations enabled, creating a new account within the organization is pretty simple. One can also invite existing accounts to join the organization. From the AWS management console:
@@ -75,11 +77,11 @@ On the add account screen:
   - Select "create an AWS account"
   - Give the account a name (I'd suggest establishing some kind of naming convention)
   - Provide an email address (for personal accounts, using a personal email address can be tricky. There are a few options, of which the easiest is probably using aliases. If you use Gmail and your address is `myaddress@gmail.com`, you could use `myaddress+aws1@gmail.com`, `myaddress+aws2`, `+aws3`, etc.)
-  - Provide an IAM role name. AWS will create this role in the new account as part of the provisioning process. This role can be assumed from the org management account to perform any desired tasks. Given that the new account will not have an active root user or any IAM principals, this is one way to access the account without having to jump through hoops. I believe it is optional and, if AWS SSO is configured from the org management account, not necessary
+  - Provide an IAM role name. AWS will create this role in the new account as part of the provisioning process. This role can be assumed from the org management account to perform any desired tasks. Given that the new account will not have an active root user or any IAM identities, this is one way to access the account without having to jump through hoops. I believe it is optional and, if AWS SSO is configured from the org management account, not necessary
 
 ![Create organization account](/post/aws/securing-a-personal-aws-account/images/create_account_org.png)
 
-# Securing the Root User
+## Securing the Root User
 With AWS Organizations enabled and a new account created, next steps would be to lock down the organization management account and root user. But first, what is the root user?
 
 Every AWS account has a root user. This user, much like the root user in Linux, has completely unrestricted access to everything in the AWS account. Even if an IAM user is granted the most permissive policy possible within an AWS, there are still certain account operations that would require the root user to be the signed in principal. There are no IAM level policies that can be applied to the root user to explicitly deny access to services. Only AWS Organizations Service Control Policies can limit a root user (with some caveats). AWS lists some tasks that [only a root user can execute][only-root].
@@ -109,7 +111,7 @@ And with that, the account has a reasonably good level of protection. To recap w
   - An AWS Org management account has been established
   - A member account(s) has/have been created
     - Optionally, a management account role has been created in any member accounts (not necessarily necessary)
-  - Billing access has been enabled for IAM principals
+  - Billing access has been enabled for IAM identities
   - MFA has been turned on for the root user
   - Root user access keys have been deleted if they existed
   - No IAM users have been created in the root account
@@ -120,6 +122,7 @@ That concludes part 1 of this multi-part series. Stay tuned for part 2!
 
 
 [part-2]: https://dariushall.com/post/aws/securing-a-personal-aws-account/iam-personal-accounts-part-2/ "Part 2 - AWS For Personal Use/Learning: Identity and Access Management"
+[part-3]: https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/ "Part 3 - AWS For Personal Use/Learning: Account Level Guardrails"
 [create-account]: https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/ "Create and Activate an AWS Account"
 [aws-waf]: https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html "AWS WAF Home Page"
 [security-pillar]: https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html "AWS WAF Security Pillar Home Page"

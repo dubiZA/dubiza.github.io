@@ -7,8 +7,8 @@
     <title>Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup | Darius Hall</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="This is the first post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 2 - AWS For Personal Use/Learning: Identity and Access Management  The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or work with AWS; until you dig in and actually start experimenting, it&rsquo;s not going to become a persistent skill.">
-    <meta name="generator" content="Hugo 0.82.0" />
+ Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 3 - AWS For Personal Use/Learning: Account Level Guardrails  The best way to learn is to do.">
+    <meta name="generator" content="Hugo 0.83.1" />
     
     
       <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
@@ -30,7 +30,7 @@
     
     <meta property="og:title" content="Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup" />
 <meta property="og:description" content="This is the first post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 2 - AWS For Personal Use/Learning: Identity and Access Management  The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or work with AWS; until you dig in and actually start experimenting, it&rsquo;s not going to become a persistent skill." />
+ Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 3 - AWS For Personal Use/Learning: Account Level Guardrails  The best way to learn is to do." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dariushall.com/post/aws/securing-a-personal-aws-account/secure-multi-account-setup-part-1/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-05-27T20:57:01-06:00" />
@@ -38,13 +38,13 @@
 
 <meta itemprop="name" content="Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup">
 <meta itemprop="description" content="This is the first post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 2 - AWS For Personal Use/Learning: Identity and Access Management  The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or work with AWS; until you dig in and actually start experimenting, it&rsquo;s not going to become a persistent skill."><meta itemprop="datePublished" content="2021-05-27T20:57:01-06:00" />
+ Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 3 - AWS For Personal Use/Learning: Account Level Guardrails  The best way to learn is to do."><meta itemprop="datePublished" content="2021-05-27T20:57:01-06:00" />
 <meta itemprop="dateModified" content="2021-05-27T20:57:01-06:00" />
-<meta itemprop="wordCount" content="2083">
+<meta itemprop="wordCount" content="2093">
 <meta itemprop="keywords" content="aws,reference,cloud security,aws organizations," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup"/>
 <meta name="twitter:description" content="This is the first post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 2 - AWS For Personal Use/Learning: Identity and Access Management  The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or work with AWS; until you dig in and actually start experimenting, it&rsquo;s not going to become a persistent skill."/>
+ Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 3 - AWS For Personal Use/Learning: Account Level Guardrails  The best way to learn is to do."/>
 
       
     
@@ -178,12 +178,13 @@
       
       
         <span class="f6 mv4 dib tracked"> - 10 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 2083 words</span>
+        <span class="f6 mv4 dib tracked"> - 2093 words</span>
       
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p><em>This is the first post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:</em></p>
 <ul>
 <li><em><a href="https://dariushall.com/post/aws/securing-a-personal-aws-account/iam-personal-accounts-part-2/" title="Part 2 - AWS For Personal Use/Learning: Identity and Access Management">Part 2 - AWS For Personal Use/Learning: Identity and Access Management</a></em></li>
+<li><em><a href="https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/" title="Part 3 - AWS For Personal Use/Learning: Account Level Guardrails">Part 3 - AWS For Personal Use/Learning: Account Level Guardrails</a></em></li>
 </ul>
 <p>The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or work with AWS; until you dig in and actually start experimenting, it&rsquo;s not going to become a persistent skill. AWS is an incredible platform that is growing and innovating as a Cloud Services Provider in amazing ways. There are over 250 services available through AWS, and that list grows bigger every year.</p>
 <p>AWS makes learning and experimenting on their platform easy for anyone. All you need is a phone number, email address and credit card. AWS has a <a href="https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/" title="Create and Activate an AWS Account">support article</a> that walks through the process, and, given that I&rsquo;ve already got my account set up, I&rsquo;m not going to cover that in this post.</p>
@@ -201,7 +202,7 @@
 <p>With that in mind, lets jump in to setting up AWS accounts for personal use with a secure baseline, following best practices from the Security Pillar of thw AWS Well-Architected Framework as closely as possible given the personal use use-case.</p>
 <p><em>I should point out that, because I have already had my AWS accounts running for several months, this write-up is not going to be a complete step-by-step, walking through account creation for the initial account, to the initial setup of AWS Organizations. As mentioned above, those gaps can be filled by looking at AWS&rsquo;s documentation.</em></p>
 <p><em>I should also make mention of <a href="https://aws.amazon.com/controltower/?control-blogs.sort-by=item.additionalFields.createdDate&amp;control-blogs.sort-order=desc" title="AWS Control Tower">AWS Control Tower</a> which is probably a better way to do all this, but involves a service or two that add costs I&rsquo;d rather not incur for personal use.</em></p>
-<h1 id="account-architecture">Account Architecture</h1>
+<h2 id="account-architecture">Account Architecture</h2>
 <p>As mentioned above, AWS recommends taking a multi-account approach to using AWS. As such, AWS Organizations was introduced some time ago to facilitate easier management of a multi-account architecture. Many of AWS&rsquo;s services integrate with Organizations for easier deployment across multiple accounts (services like GuardDuty, AWS SSO, CloudTrail, etc).</p>
 <p>I currently have four active AWS accounts:</p>
 <ul>
@@ -211,14 +212,14 @@
 <li>Learning</li>
 </ul>
 <p><img src="/post/aws/securing-a-personal-aws-account/images/account_architecture.png" alt="Account Architecture"></p>
-<h2 id="overview-of-my-account-roles">Overview of My Account Roles</h2>
+<h3 id="overview-of-my-account-roles">Overview of My Account Roles</h3>
 <p>The org management account is used for almost nothing. It&rsquo;s main purpose is to be the gatekeeper and facilitator of AWS Organizations and the security and governance tools that are applied to the rest of the accounts in the organization. This includes thinks like enabling an org-wide CloudTrail log trail, Service Control Policies, Tagging Policies and being the &ldquo;identity&rdquo; account for AWS SSO.</p>
 <p>No workloads are executed from this account. No compute, storage, networking or any other services are used for running applications, learning new things (unless they are AWS Organizations related). In my org management account, there are no IAM roles or IAM users.</p>
 <p>The intention of the security account is to be the account that runs security tooling. Services like GuardDuty, SecurityHub, Firewall Manager, etc. would be managed from this account. Many of the AWS security services integrate well with AWS Organizations. These security services also work in a management/member model, much like the Organizations service. The security account will be used as the management account for such services.</p>
 <p>The shared services account is one that I have created, but not yet utilized for anything. I see this account as being a place to run services and solutions that might apply to all accounts but doesn&rsquo;t necessarily have to. So, things like deploying Infrastructure as Code (CloudFormation/Terraform) to spin up the infrastructure components I might want in other accounts. To me it makes sense to manage all this from a central account, rather than in each account. Using cross account roles and features in CloudFormation like StackSets can facilitate having a single place for these &ldquo;shared services&rdquo;.</p>
 <p>The learning account is what I have for learning new cloud things. The intention here is to separate out the account where the bulk of my learning will take place so that if I inadvertently spin up a bunch of stuff that I lose track of and start getting billed for in surprising ways, I can always blow this learning account away and start over, without affecting the rest of my account architecture.</p>
 <p>There are some accounts that I do not yet have, but would like to add soon. One of those would be a centralized logging account where all CloudTrail, GuardDuty, and any other important log that might need longer term storage can go. This account would be locked down and hardened as much as possible to protect the integrity of the logs. I might also look at adding accounts to simulate production and development accounts, accounts that meet other compliance requirements like HIPPA, PCI, etc. But for now, I&rsquo;m running with the four accounts listed above. As I continue to learn and understand more about AWS and best practices, things will develop and change.</p>
-<h2 id="adding-accounts">Adding Accounts</h2>
+<h3 id="adding-accounts">Adding Accounts</h3>
 <p>As mentioned above, my accounts have been running for a while, so this does not aim to show how to create the initial management account, nor does it show how to enable AWS Organizations. Following AWS&rsquo;s documentation to accomplish those two steps would be best.</p>
 <p>Once the initial management account is created and Organizations enabled, creating a new account within the organization is pretty simple. One can also invite existing accounts to join the organization. From the AWS management console:</p>
 <ul>
@@ -232,10 +233,10 @@
 <li>Select &ldquo;create an AWS account&rdquo;</li>
 <li>Give the account a name (I&rsquo;d suggest establishing some kind of naming convention)</li>
 <li>Provide an email address (for personal accounts, using a personal email address can be tricky. There are a few options, of which the easiest is probably using aliases. If you use Gmail and your address is <code>myaddress@gmail.com</code>, you could use <code>myaddress+aws1@gmail.com</code>, <code>myaddress+aws2</code>, <code>+aws3</code>, etc.)</li>
-<li>Provide an IAM role name. AWS will create this role in the new account as part of the provisioning process. This role can be assumed from the org management account to perform any desired tasks. Given that the new account will not have an active root user or any IAM principals, this is one way to access the account without having to jump through hoops. I believe it is optional and, if AWS SSO is configured from the org management account, not necessary</li>
+<li>Provide an IAM role name. AWS will create this role in the new account as part of the provisioning process. This role can be assumed from the org management account to perform any desired tasks. Given that the new account will not have an active root user or any IAM identities, this is one way to access the account without having to jump through hoops. I believe it is optional and, if AWS SSO is configured from the org management account, not necessary</li>
 </ul>
 <p><img src="/post/aws/securing-a-personal-aws-account/images/create_account_org.png" alt="Create organization account"></p>
-<h1 id="securing-the-root-user">Securing the Root User</h1>
+<h2 id="securing-the-root-user">Securing the Root User</h2>
 <p>With AWS Organizations enabled and a new account created, next steps would be to lock down the organization management account and root user. But first, what is the root user?</p>
 <p>Every AWS account has a root user. This user, much like the root user in Linux, has completely unrestricted access to everything in the AWS account. Even if an IAM user is granted the most permissive policy possible within an AWS, there are still certain account operations that would require the root user to be the signed in principal. There are no IAM level policies that can be applied to the root user to explicitly deny access to services. Only AWS Organizations Service Control Policies can limit a root user (with some caveats). AWS lists some tasks that <a href="https://docs.aws.amazon.com/general/latest/gr/root-vs-iam.html#aws_tasks-that-require-root" title="Tasks requiring root">only a root user can execute</a>.</p>
 <p>If the account root user is compromised, it can be extremely difficult to recover the account, and is something that would require AWS intervention to accomplish. For this reason, once the initial account setup and security hardening is complete <strong>avoid using root</strong>! AWS best practice is to make sure the root user has no access keys, that a strong, complex password is used and that MFA is enabled. Let&rsquo;s take a look at how to do that and some other account setup that is useful.</p>
@@ -263,7 +264,7 @@
 <li>Optionally, a management account role has been created in any member accounts (not necessarily necessary)</li>
 </ul>
 </li>
-<li>Billing access has been enabled for IAM principals</li>
+<li>Billing access has been enabled for IAM identities</li>
 <li>MFA has been turned on for the root user</li>
 <li>Root user access keys have been deleted if they existed</li>
 <li>No IAM users have been created in the root account</li>
@@ -316,7 +317,20 @@
       </div>
     </div>
 
-    <aside class="w-30-l mt6-l">
+    <aside class="w-30-l mt6-l"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">What&#39;s in this post</p>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#account-architecture">Account Architecture</a>
+      <ul>
+        <li><a href="#overview-of-my-account-roles">Overview of My Account Roles</a></li>
+        <li><a href="#adding-accounts">Adding Accounts</a></li>
+      </ul>
+    </li>
+    <li><a href="#securing-the-root-user">Securing the Root User</a></li>
+  </ul>
+</nav>
+  </div>
 
 
 
