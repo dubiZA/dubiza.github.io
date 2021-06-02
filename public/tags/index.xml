@@ -6,11 +6,11 @@
     <description>Recent content in Tags on Darius Hall</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 28 May 2021 21:26:09 -0600</lastBuildDate><atom:link href="https://dariushall.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jun 2021 07:01:09 -0600</lastBuildDate><atom:link href="https://dariushall.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>aws</title>
       <link>https://dariushall.com/tags/aws/</link>
-      <pubDate>Fri, 28 May 2021 21:26:09 -0600</pubDate>
+      <pubDate>Tue, 01 Jun 2021 07:01:09 -0600</pubDate>
       
       <guid>https://dariushall.com/tags/aws/</guid>
       <description></description>
@@ -19,7 +19,7 @@
     <item>
       <title>aws iam</title>
       <link>https://dariushall.com/tags/aws-iam/</link>
-      <pubDate>Fri, 28 May 2021 21:26:09 -0600</pubDate>
+      <pubDate>Tue, 01 Jun 2021 07:01:09 -0600</pubDate>
       
       <guid>https://dariushall.com/tags/aws-iam/</guid>
       <description></description>
@@ -28,9 +28,36 @@
     <item>
       <title>aws organizations</title>
       <link>https://dariushall.com/tags/aws-organizations/</link>
-      <pubDate>Fri, 28 May 2021 21:26:09 -0600</pubDate>
+      <pubDate>Tue, 01 Jun 2021 07:01:09 -0600</pubDate>
       
       <guid>https://dariushall.com/tags/aws-organizations/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aws scp</title>
+      <link>https://dariushall.com/tags/aws-scp/</link>
+      <pubDate>Tue, 01 Jun 2021 07:01:09 -0600</pubDate>
+      
+      <guid>https://dariushall.com/tags/aws-scp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloud security</title>
+      <link>https://dariushall.com/tags/cloud-security/</link>
+      <pubDate>Tue, 01 Jun 2021 07:01:09 -0600</pubDate>
+      
+      <guid>https://dariushall.com/tags/cloud-security/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>reference</title>
+      <link>https://dariushall.com/tags/reference/</link>
+      <pubDate>Tue, 01 Jun 2021 07:01:09 -0600</pubDate>
+      
+      <guid>https://dariushall.com/tags/reference/</guid>
       <description></description>
     </item>
     
@@ -40,24 +67,6 @@
       <pubDate>Fri, 28 May 2021 21:26:09 -0600</pubDate>
       
       <guid>https://dariushall.com/tags/aws-sso/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>cloud security</title>
-      <link>https://dariushall.com/tags/cloud-security/</link>
-      <pubDate>Fri, 28 May 2021 21:26:09 -0600</pubDate>
-      
-      <guid>https://dariushall.com/tags/cloud-security/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>reference</title>
-      <link>https://dariushall.com/tags/reference/</link>
-      <pubDate>Fri, 28 May 2021 21:26:09 -0600</pubDate>
-      
-      <guid>https://dariushall.com/tags/reference/</guid>
       <description></description>
     </item>
     
@@ -76,15 +85,6 @@
       <pubDate>Mon, 29 Mar 2021 16:24:16 -0600</pubDate>
       
       <guid>https://dariushall.com/tags/cli/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>aws scp</title>
-      <link>https://dariushall.com/tags/aws-scp/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dariushall.com/tags/aws-scp/</guid>
       <description></description>
     </item>
     

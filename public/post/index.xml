@@ -8,6 +8,16 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 27 May 2021 08:29:58 -0600</lastBuildDate><atom:link href="https://dariushall.com/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Part 3 - AWS For Personal Use/Learning: Account Level Guardrails</title>
+      <link>https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/</link>
+      <pubDate>Tue, 01 Jun 2021 07:01:09 -0600</pubDate>
+      
+      <guid>https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/</guid>
+      <description>This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach.</description>
+    </item>
+    
+    <item>
       <title>Part 2 - AWS For Personal Use/Learning: Identity and Access Management</title>
       <link>https://dariushall.com/post/aws/securing-a-personal-aws-account/iam-personal-accounts-part-2/</link>
       <pubDate>Fri, 28 May 2021 21:26:09 -0600</pubDate>
@@ -34,16 +44,6 @@
       
       <guid>https://dariushall.com/post/aws/configuring-the-aws-cli/</guid>
       <description>Every time I set up a fresh install of an operating system as a result of a new computer or messing around with different OSes on existing systems, I end up having to set up the AWS CLI from scratch. I have multiple personal AWS accounts to use for learning and running services that I want on a more resilient platform than running them on a server at home. It&amp;rsquo;s always a pain to find the right doc pages for setting up the CLI with easy MFA assume role, so it&amp;rsquo;s time to document that here.</description>
-    </item>
-    
-    <item>
-      <title>Part 3 - AWS For Personal Use/Learning: Account Level Guardrails</title>
-      <link>https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/</guid>
-      <description>This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach.</description>
     </item>
     
   </channel>
