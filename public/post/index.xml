@@ -24,7 +24,7 @@
       
       <guid>https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/</guid>
       <description>This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach.</description>
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 4 - AWS For Personal Use/Learning: The Audit Trail  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach.</description>
     </item>
     
     <item>
@@ -34,7 +34,7 @@
       
       <guid>https://dariushall.com/post/aws/securing-a-personal-aws-account/iam-personal-accounts-part-2/</guid>
       <description>This is the second post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 3 - AWS For Personal Use/Learning: Account Level Guardrails  With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!</description>
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 3 - AWS For Personal Use/Learning: Account Level Guardrails Part 4 - AWS For Personal Use/Learning: The Audit Trail  With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!</description>
     </item>
     
     <item>
@@ -44,7 +44,7 @@
       
       <guid>https://dariushall.com/post/aws/securing-a-personal-aws-account/secure-multi-account-setup-part-1/</guid>
       <description>This is the first post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 3 - AWS For Personal Use/Learning: Account Level Guardrails  The best way to learn is to do.</description>
+ Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 3 - AWS For Personal Use/Learning: Account Level Guardrails Part 4 - AWS For Personal Use/Learning: The Audit Trail  The best way to learn is to do.</description>
     </item>
     
     <item>

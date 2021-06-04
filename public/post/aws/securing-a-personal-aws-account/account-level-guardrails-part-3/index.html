@@ -7,7 +7,7 @@
     <title>Part 3 - AWS For Personal Use/Learning: Account Level Guardrails | Darius Hall</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach.">
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 4 - AWS For Personal Use/Learning: The Audit Trail  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach.">
     <meta name="generator" content="Hugo 0.83.1" />
     
     
@@ -30,7 +30,7 @@
     
     <meta property="og:title" content="Part 3 - AWS For Personal Use/Learning: Account Level Guardrails" />
 <meta property="og:description" content="This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach." />
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 4 - AWS For Personal Use/Learning: The Audit Trail  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-06-01T07:01:09-06:00" />
@@ -38,13 +38,13 @@
 
 <meta itemprop="name" content="Part 3 - AWS For Personal Use/Learning: Account Level Guardrails">
 <meta itemprop="description" content="This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach."><meta itemprop="datePublished" content="2021-06-01T07:01:09-06:00" />
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 4 - AWS For Personal Use/Learning: The Audit Trail  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach."><meta itemprop="datePublished" content="2021-06-01T07:01:09-06:00" />
 <meta itemprop="dateModified" content="2021-06-01T07:01:09-06:00" />
-<meta itemprop="wordCount" content="1986">
+<meta itemprop="wordCount" content="1996">
 <meta itemprop="keywords" content="aws,reference,cloud security,aws iam,aws scp,aws organizations," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Part 3 - AWS For Personal Use/Learning: Account Level Guardrails"/>
 <meta name="twitter:description" content="This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach."/>
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 4 - AWS For Personal Use/Learning: The Audit Trail  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach."/>
 
       
     
@@ -178,13 +178,14 @@
       
       
         <span class="f6 mv4 dib tracked"> - 10 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 1986 words</span>
+        <span class="f6 mv4 dib tracked"> - 1996 words</span>
       
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p><em>This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:</em></p>
 <ul>
 <li><em><a href="https://dariushall.com/post/aws/securing-a-personal-aws-account/secure-multi-account-setup-part-1/" title="Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup">Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup</a></em></li>
 <li><em><a href="https://dariushall.com/post/aws/securing-a-personal-aws-account/iam-personal-accounts-part-2/" title="Part 2 - AWS For Personal Use/Learning: Identity and Access Management">Part 2 - AWS For Personal Use/Learning: Identity and Access Management</a></em></li>
+<li><em><a href="https://dariushall.com/post/aws/securing-a-personal-aws-account/the-audit-trail-part-4/" title="Part 4 - AWS For Personal Use/Learning: The Audit Trail">Part 4 - AWS For Personal Use/Learning: The Audit Trail</a></em></li>
 </ul>
 <p>So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach. At least two accounts exist in the organization (see part 1 for my account architecture which, at present, includes 4 accounts with distinct roles in the AWS Organization) and human access has been enabled through the use of AWS SSO. Least privilege for said human access has been through the use of SSO user groups and permission sets associated with the AWS accounts and SSO users/groups. That is a great baseline, especially for individual, human user based access, however, control can be tightened up even more at an account level.</p>
 <p>The AWS Organizations service introduced many ways to enable a streamlined approach to managing and governing a multi-account AWS architecture. Organizations supports two general feature sets to users of the service:</p>
