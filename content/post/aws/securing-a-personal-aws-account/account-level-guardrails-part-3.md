@@ -159,12 +159,9 @@ Some suggestions from the example SCPs would be to:
 
   - Deny IAM identities from making changes to admin roles (in the case where a cross-account role was added when creating new org member accounts)
   - Denying org member accounts the ability to leave the organization
-  - Denying or member accounts the ability to disable GuardDuty (part 4 of this series will look at turning GuardDuty on)
+  - Denying or member accounts the ability to disable GuardDuty (part 5 of this series will look at turning GuardDuty on)
 
-Currently, I'm only using the policies to block undesired regions and EC2 instances, however, I will be experimenting with a new baseline SCP which I'll included here with a later update when I have it working. At this point, I think we can call this post done though. AWS has been configured with some great initial baseline security measures. The addition of SCPs will add some useful guardrails to prevent member accounts from being used in ways that are not desired. Next steps are to set up GuardDuty and an alerting mechanism for when GuardDuty finds something weird. Stay tuned for part 4!
-
-
-
+Currently, I'm only using the policies to block undesired regions and EC2 instances, however, I will be experimenting with a new baseline SCP which I'll included here with a later update when I have it working. At this point, I think we can call this post done though. AWS has been configured with some great initial baseline security measures. The addition of SCPs will add some useful guardrails to prevent member accounts from being used in ways that are not desired. Next steps are to set up an audit log of all the API actions taking place across accounts in the AWS Organization. Stay tuned for part 4!
 
 
 [part-1]: https://dariushall.com/post/aws/securing-a-personal-aws-account/secure-multi-account-setup-part-1/ "Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup"

@@ -2,17 +2,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://dariushall.com/tags/aws/</loc>
-    <lastmod>2021-06-01T07:01:09-06:00</lastmod>
+    <loc>https://dariushall.com/tags/amazon-guardduty/</loc>
+    <lastmod>2021-06-04T07:14:46-06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://dariushall.com/tags/aws-iam/</loc>
-    <lastmod>2021-06-01T07:01:09-06:00</lastmod>
+    <loc>https://dariushall.com/tags/aws/</loc>
+    <lastmod>2021-06-04T07:14:46-06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://dariushall.com/tags/aws-organizations/</loc>
+    <lastmod>2021-06-04T07:14:46-06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://dariushall.com/tags/cloud-security/</loc>
+    <lastmod>2021-06-04T07:14:46-06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://dariushall.com/post/aws/securing-a-personal-aws-account/the-audit-trail-part-4/</loc>
+    <lastmod>2021-06-04T07:14:46-06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://dariushall.com/tags/reference/</loc>
+    <lastmod>2021-06-04T07:14:46-06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://dariushall.com/tags/</loc>
+    <lastmod>2021-06-04T07:14:46-06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://dariushall.com/</loc>
+    <lastmod>2021-06-04T07:14:46-06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://dariushall.com/tags/aws-iam/</loc>
     <lastmod>2021-06-01T07:01:09-06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -22,27 +52,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://dariushall.com/tags/cloud-security/</loc>
-    <lastmod>2021-06-01T07:01:09-06:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/</loc>
-    <lastmod>2021-06-01T07:01:09-06:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://dariushall.com/tags/reference/</loc>
-    <lastmod>2021-06-01T07:01:09-06:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://dariushall.com/tags/</loc>
-    <lastmod>2021-06-01T07:01:09-06:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://dariushall.com/</loc>
     <lastmod>2021-06-01T07:01:09-06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

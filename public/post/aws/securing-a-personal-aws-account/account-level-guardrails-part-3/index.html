@@ -40,7 +40,7 @@
 <meta itemprop="description" content="This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
  Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management  So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach."><meta itemprop="datePublished" content="2021-06-01T07:01:09-06:00" />
 <meta itemprop="dateModified" content="2021-06-01T07:01:09-06:00" />
-<meta itemprop="wordCount" content="1981">
+<meta itemprop="wordCount" content="1986">
 <meta itemprop="keywords" content="aws,reference,cloud security,aws iam,aws scp,aws organizations," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Part 3 - AWS For Personal Use/Learning: Account Level Guardrails"/>
 <meta name="twitter:description" content="This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
@@ -178,7 +178,7 @@
       
       
         <span class="f6 mv4 dib tracked"> - 10 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 1981 words</span>
+        <span class="f6 mv4 dib tracked"> - 1986 words</span>
       
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p><em>This is the third post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:</em></p>
@@ -313,9 +313,9 @@
 <ul>
 <li>Deny IAM identities from making changes to admin roles (in the case where a cross-account role was added when creating new org member accounts)</li>
 <li>Denying org member accounts the ability to leave the organization</li>
-<li>Denying or member accounts the ability to disable GuardDuty (part 4 of this series will look at turning GuardDuty on)</li>
+<li>Denying or member accounts the ability to disable GuardDuty (part 5 of this series will look at turning GuardDuty on)</li>
 </ul>
-<p>Currently, I&rsquo;m only using the policies to block undesired regions and EC2 instances, however, I will be experimenting with a new baseline SCP which I&rsquo;ll included here with a later update when I have it working. At this point, I think we can call this post done though. AWS has been configured with some great initial baseline security measures. The addition of SCPs will add some useful guardrails to prevent member accounts from being used in ways that are not desired. Next steps are to set up GuardDuty and an alerting mechanism for when GuardDuty finds something weird. Stay tuned for part 4!</p>
+<p>Currently, I&rsquo;m only using the policies to block undesired regions and EC2 instances, however, I will be experimenting with a new baseline SCP which I&rsquo;ll included here with a later update when I have it working. At this point, I think we can call this post done though. AWS has been configured with some great initial baseline security measures. The addition of SCPs will add some useful guardrails to prevent member accounts from being used in ways that are not desired. Next steps are to set up an audit log of all the API actions taking place across accounts in the AWS Organization. Stay tuned for part 4!</p>
 <ul class="pa0">
   
    <li class="list">

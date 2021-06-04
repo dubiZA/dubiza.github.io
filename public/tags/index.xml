@@ -6,13 +6,49 @@
     <description>Recent content in Tags on Darius Hall</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 01 Jun 2021 07:01:09 -0600</lastBuildDate><atom:link href="https://dariushall.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Jun 2021 07:14:46 -0600</lastBuildDate><atom:link href="https://dariushall.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>amazon guardduty</title>
+      <link>https://dariushall.com/tags/amazon-guardduty/</link>
+      <pubDate>Fri, 04 Jun 2021 07:14:46 -0600</pubDate>
+      
+      <guid>https://dariushall.com/tags/amazon-guardduty/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>aws</title>
       <link>https://dariushall.com/tags/aws/</link>
-      <pubDate>Tue, 01 Jun 2021 07:01:09 -0600</pubDate>
+      <pubDate>Fri, 04 Jun 2021 07:14:46 -0600</pubDate>
       
       <guid>https://dariushall.com/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aws organizations</title>
+      <link>https://dariushall.com/tags/aws-organizations/</link>
+      <pubDate>Fri, 04 Jun 2021 07:14:46 -0600</pubDate>
+      
+      <guid>https://dariushall.com/tags/aws-organizations/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloud security</title>
+      <link>https://dariushall.com/tags/cloud-security/</link>
+      <pubDate>Fri, 04 Jun 2021 07:14:46 -0600</pubDate>
+      
+      <guid>https://dariushall.com/tags/cloud-security/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>reference</title>
+      <link>https://dariushall.com/tags/reference/</link>
+      <pubDate>Fri, 04 Jun 2021 07:14:46 -0600</pubDate>
+      
+      <guid>https://dariushall.com/tags/reference/</guid>
       <description></description>
     </item>
     
@@ -26,38 +62,11 @@
     </item>
     
     <item>
-      <title>aws organizations</title>
-      <link>https://dariushall.com/tags/aws-organizations/</link>
-      <pubDate>Tue, 01 Jun 2021 07:01:09 -0600</pubDate>
-      
-      <guid>https://dariushall.com/tags/aws-organizations/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>aws scp</title>
       <link>https://dariushall.com/tags/aws-scp/</link>
       <pubDate>Tue, 01 Jun 2021 07:01:09 -0600</pubDate>
       
       <guid>https://dariushall.com/tags/aws-scp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>cloud security</title>
-      <link>https://dariushall.com/tags/cloud-security/</link>
-      <pubDate>Tue, 01 Jun 2021 07:01:09 -0600</pubDate>
-      
-      <guid>https://dariushall.com/tags/cloud-security/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>reference</title>
-      <link>https://dariushall.com/tags/reference/</link>
-      <pubDate>Tue, 01 Jun 2021 07:01:09 -0600</pubDate>
-      
-      <guid>https://dariushall.com/tags/reference/</guid>
       <description></description>
     </item>
     
