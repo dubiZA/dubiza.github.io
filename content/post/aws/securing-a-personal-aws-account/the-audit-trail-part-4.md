@@ -14,6 +14,7 @@ _This is the fourth post in what is a multi-part series on some suggestions base
   - _[Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup][part-1]_
   - _[Part 2 - AWS For Personal Use/Learning: Identity and Access Management][part-2]_
   - _[Part 3 - AWS For Personal Use/Learning: Account Level Guardrails][part-3]_
+  - _[Part 5 - AWS For Personal Use/Learning: Intelligent Threat Detection][part-5]_
 
 An important part of security is attribution or accountability - who did what (also helpful is when and sometimes from where). With so many AWS services on offer and what must be over 1000 API calls across these services, being able to track and hunt for badness is important. To this end, AWS provides the CloudTrail service. CloudTrail keeps a record of all the API calls made on the control plane and data plane of AWS and creates a logs of all the activity. This log can then be used for troubleshooting, security, and more.
 
@@ -67,3 +68,4 @@ In the next post we'll be looking at Amazon GuardDuty which provides "intelligen
 [part-1]: https://dariushall.com/post/aws/securing-a-personal-aws-account/secure-multi-account-setup-part-1/ "Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup"
 [part-2]: https://dariushall.com/post/aws/securing-a-personal-aws-account/iam-personal-accounts-part-2/ "Part 2 - AWS For Personal Use/Learning: Identity and Access Management"
 [part-3]: https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/ "Part 3 - AWS For Personal Use/Learning: Account Level Guardrails"
+[part-5]: https://dariushall.com/post/aws/securing-a-personal-aws-account/intelligent-threat-detection-part-5/ "Part 5 - AWS For Personal Use/Learning: Intelligent Threat Detection"

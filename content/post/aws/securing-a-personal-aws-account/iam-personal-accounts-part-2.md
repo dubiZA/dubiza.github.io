@@ -2,7 +2,7 @@
 title: "Part 2 - AWS For Personal Use/Learning: Identity and Access Management"
 date: 2021-05-28T21:26:09-06:00
 draft: false
-toc: true
+toc: false
 tags:
   - aws
   - reference
@@ -15,6 +15,7 @@ _This is the second post in what is a multi-part series on some suggestions base
   - _[Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup][part-1]_
   - _[Part 3 - AWS For Personal Use/Learning: Account Level Guardrails][part-3]_
   - _[Part 4 - AWS For Personal Use/Learning: The Audit Trail][part-4]_
+  - _[Part 5 - AWS For Personal Use/Learning: Intelligent Threat Detection][part-5]_
 
 With everything locked down in the management account and potentially no AWS Organizations cross account role created, how the heck does the account get used without using the root account!? Well, there are a couple of ways this could be approached. AWS recommends using a central identity store to efficiently manage users. This makes sense, especially in large organizations where there is typically more churn in the employee base. Additionally, there are generally two types of identities that might be required in AWS:
 
@@ -114,4 +115,5 @@ There we have it. Any AWS accounts associated with the user created in this guid
 [part-1]: https://dariushall.com/post/aws/securing-a-personal-aws-account/secure-multi-account-setup-part-1/ "Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup"
 [part-3]: https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/ "Part 3 - AWS For Personal Use/Learning: Account Level Guardrails"
 [part-4]: https://dariushall.com/post/aws/securing-a-personal-aws-account/the-audit-trail-part-4/ "Part 4 - AWS For Personal Use/Learning: The Audit Trail"
+[part-5]: https://dariushall.com/post/aws/securing-a-personal-aws-account/intelligent-threat-detection-part-5/ "Part 5 - AWS For Personal Use/Learning: Intelligent Threat Detection"
 [aws-cli2]: https://aws.amazon.com/blogs/developer/aws-cli-v2-is-now-generally-available/ "AWS CLI v2 release notes"

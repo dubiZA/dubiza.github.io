@@ -13,6 +13,7 @@ _This is the first post in what is a multi-part series on some suggestions based
   - _[Part 2 - AWS For Personal Use/Learning: Identity and Access Management][part-2]_
   - _[Part 3 - AWS For Personal Use/Learning: Account Level Guardrails][part-3]_
   - _[Part 4 - AWS For Personal Use/Learning: The Audit Trail][part-4]_
+  - _[Part 5 - AWS For Personal Use/Learning: Intelligent Threat Detection][part-5]_
 
 The best way to learn is to do. You can read all you want about how to code in Python, create and run Docker containers, build a bookshelf or work with AWS; until you dig in and actually start experimenting, it's not going to become a persistent skill. AWS is an incredible platform that is growing and innovating as a Cloud Services Provider in amazing ways. There are over 250 services available through AWS, and that list grows bigger every year.
 
@@ -125,6 +126,7 @@ That concludes part 1 of this multi-part series. Stay tuned for part 2!
 [part-2]: https://dariushall.com/post/aws/securing-a-personal-aws-account/iam-personal-accounts-part-2/ "Part 2 - AWS For Personal Use/Learning: Identity and Access Management"
 [part-3]: https://dariushall.com/post/aws/securing-a-personal-aws-account/account-level-guardrails-part-3/ "Part 3 - AWS For Personal Use/Learning: Account Level Guardrails"
 [part-4]: https://dariushall.com/post/aws/securing-a-personal-aws-account/the-audit-trail-part-4/ "Part 4 - AWS For Personal Use/Learning: The Audit Trail"
+[part-5]: https://dariushall.com/post/aws/securing-a-personal-aws-account/intelligent-threat-detection-part-5/ "Part 5 - AWS For Personal Use/Learning: Intelligent Threat Detection"
 [create-account]: https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/ "Create and Activate an AWS Account"
 [aws-waf]: https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html "AWS WAF Home Page"
 [security-pillar]: https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html "AWS WAF Security Pillar Home Page"

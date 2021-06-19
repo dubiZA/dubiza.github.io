@@ -15,6 +15,7 @@ _This is the third post in what is a multi-part series on some suggestions based
   - _[Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup][part-1]_
   - _[Part 2 - AWS For Personal Use/Learning: Identity and Access Management][part-2]_
   - _[Part 4 - AWS For Personal Use/Learning: The Audit Trail][part-4]_
+  - _[Part 5 - AWS For Personal Use/Learning: Intelligent Threat Detection][part-5]_
 
 So far in this multi-part series, the benefits of multiple AWS accounts has been discussed and AWS Organizations has been configured to enable that approach. At least two accounts exist in the organization (see part 1 for my account architecture which, at present, includes 4 accounts with distinct roles in the AWS Organization) and human access has been enabled through the use of AWS SSO. Least privilege for said human access has been through the use of SSO user groups and permission sets associated with the AWS accounts and SSO users/groups. That is a great baseline, especially for individual, human user based access, however, control can be tightened up even more at an account level.
 
@@ -168,5 +169,6 @@ Currently, I'm only using the policies to block undesired regions and EC2 instan
 [part-1]: https://dariushall.com/post/aws/securing-a-personal-aws-account/secure-multi-account-setup-part-1/ "Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup"
 [part-2]: https://dariushall.com/post/aws/securing-a-personal-aws-account/iam-personal-accounts-part-2/ "Part 2 - AWS For Personal Use/Learning: Identity and Access Management"
 [part-4]: https://dariushall.com/post/aws/securing-a-personal-aws-account/the-audit-trail-part-4/ "Part 4 - AWS For Personal Use/Learning: The Audit Trail"
+[part-5]: https://dariushall.com/post/aws/securing-a-personal-aws-account/intelligent-threat-detection-part-5/ "Part 5 - AWS For Personal Use/Learning: Intelligent Threat Detection"
 [policy-eval]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html "AWS Policy Evaluation Logic"
 [region-lock]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_examples.html#examples_general "Example SCPs - Region"
