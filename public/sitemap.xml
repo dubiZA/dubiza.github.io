@@ -3,41 +3,46 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://dariushall.com/tags/amazon-guardduty/</loc>
-    <lastmod>2021-06-04T07:14:46-06:00</lastmod>
+    <lastmod>2021-06-19T15:58:00-06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://dariushall.com/tags/aws/</loc>
-    <lastmod>2021-06-04T07:14:46-06:00</lastmod>
+    <lastmod>2021-06-19T15:58:00-06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://dariushall.com/tags/aws-organizations/</loc>
-    <lastmod>2021-06-04T07:14:46-06:00</lastmod>
+    <lastmod>2021-06-19T15:58:00-06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://dariushall.com/tags/cloud-security/</loc>
-    <lastmod>2021-06-04T07:14:46-06:00</lastmod>
+    <lastmod>2021-06-19T15:58:00-06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://dariushall.com/post/aws/securing-a-personal-aws-account/the-audit-trail-part-4/</loc>
-    <lastmod>2021-06-04T07:14:46-06:00</lastmod>
+    <loc>https://dariushall.com/post/aws/securing-a-personal-aws-account/intelligent-threat-detection-part-5/</loc>
+    <lastmod>2021-06-19T15:58:00-06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://dariushall.com/tags/reference/</loc>
-    <lastmod>2021-06-04T07:14:46-06:00</lastmod>
+    <lastmod>2021-06-19T15:58:00-06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://dariushall.com/tags/</loc>
-    <lastmod>2021-06-04T07:14:46-06:00</lastmod>
+    <lastmod>2021-06-19T15:58:00-06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://dariushall.com/</loc>
+    <lastmod>2021-06-19T15:58:00-06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://dariushall.com/post/aws/securing-a-personal-aws-account/the-audit-trail-part-4/</loc>
     <lastmod>2021-06-04T07:14:46-06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

@@ -6,7 +6,17 @@
     <description>Recent content in aws on Darius Hall</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 04 Jun 2021 07:14:46 -0600</lastBuildDate><atom:link href="https://dariushall.com/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Jun 2021 15:58:00 -0600</lastBuildDate><atom:link href="https://dariushall.com/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Part 5 - AWS For Personal Use/Learning: Intelligent Threat Detection</title>
+      <link>https://dariushall.com/post/aws/securing-a-personal-aws-account/intelligent-threat-detection-part-5/</link>
+      <pubDate>Sat, 19 Jun 2021 15:58:00 -0600</pubDate>
+      
+      <guid>https://dariushall.com/post/aws/securing-a-personal-aws-account/intelligent-threat-detection-part-5/</guid>
+      <description>This is the fifth and final post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
+ Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 3 - AWS For Personal Use/Learning: Account Level Guardrails Part 4 - AWS For Personal Use/Learning: The Audit Trail  If you have IAM identities (users, roles) and compute workloads running in AWS, there is no excuse to not be using Amazon GuardDuty.</description>
+    </item>
+    
     <item>
       <title>Part 4 - AWS For Personal Use/Learning: The Audit Trail</title>
       <link>https://dariushall.com/post/aws/securing-a-personal-aws-account/the-audit-trail-part-4/</link>

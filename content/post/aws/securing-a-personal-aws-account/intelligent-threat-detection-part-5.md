@@ -1,7 +1,7 @@
 ---
 title: "Part 5 - AWS For Personal Use/Learning: Intelligent Threat Detection"
 date: 2021-06-19T15:58:00-06:00
-draft: true
+draft: false
 toc: true
 tags:
   - aws
