@@ -7,8 +7,8 @@
     <title>Part 5 - AWS For Personal Use/Learning: Intelligent Threat Detection | Darius Hall</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="This is the fifth and final post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 3 - AWS For Personal Use/Learning: Account Level Guardrails Part 4 - AWS For Personal Use/Learning: The Audit Trail  If you have IAM identities (users, roles) and compute workloads running in AWS, there is no excuse to not be using Amazon GuardDuty.">
-    <meta name="generator" content="Hugo 0.91.2" />
+Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 3 - AWS For Personal Use/Learning: Account Level Guardrails Part 4 - AWS For Personal Use/Learning: The Audit Trail If you have IAM identities (users, roles) and compute workloads running in AWS, there is no excuse to not be using Amazon GuardDuty.">
+    <meta name="generator" content="Hugo 0.109.0">
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -30,21 +30,20 @@
     
     <meta property="og:title" content="Part 5 - AWS For Personal Use/Learning: Intelligent Threat Detection" />
 <meta property="og:description" content="This is the fifth and final post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 3 - AWS For Personal Use/Learning: Account Level Guardrails Part 4 - AWS For Personal Use/Learning: The Audit Trail  If you have IAM identities (users, roles) and compute workloads running in AWS, there is no excuse to not be using Amazon GuardDuty." />
+Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 3 - AWS For Personal Use/Learning: Account Level Guardrails Part 4 - AWS For Personal Use/Learning: The Audit Trail If you have IAM identities (users, roles) and compute workloads running in AWS, there is no excuse to not be using Amazon GuardDuty." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dariushall.com/post/aws/securing-a-personal-aws-account/intelligent-threat-detection-part-5/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-06-19T15:58:00-06:00" />
 <meta property="article:modified_time" content="2021-06-19T15:58:00-06:00" /><meta property="og:site_name" content="Darius Hall" />
-
 <meta itemprop="name" content="Part 5 - AWS For Personal Use/Learning: Intelligent Threat Detection">
 <meta itemprop="description" content="This is the fifth and final post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 3 - AWS For Personal Use/Learning: Account Level Guardrails Part 4 - AWS For Personal Use/Learning: The Audit Trail  If you have IAM identities (users, roles) and compute workloads running in AWS, there is no excuse to not be using Amazon GuardDuty."><meta itemprop="datePublished" content="2021-06-19T15:58:00-06:00" />
+Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 3 - AWS For Personal Use/Learning: Account Level Guardrails Part 4 - AWS For Personal Use/Learning: The Audit Trail If you have IAM identities (users, roles) and compute workloads running in AWS, there is no excuse to not be using Amazon GuardDuty."><meta itemprop="datePublished" content="2021-06-19T15:58:00-06:00" />
 <meta itemprop="dateModified" content="2021-06-19T15:58:00-06:00" />
 <meta itemprop="wordCount" content="1560">
 <meta itemprop="keywords" content="aws,reference,cloud security,amazon guardduty,aws organizations," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Part 5 - AWS For Personal Use/Learning: Intelligent Threat Detection"/>
 <meta name="twitter:description" content="This is the fifth and final post in what is a multi-part series on some suggestions based on AWS Well-Architected Framework best practices focused on setting up an AWS account(s) for personal use and learning. For other parts in the series see:
- Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 3 - AWS For Personal Use/Learning: Account Level Guardrails Part 4 - AWS For Personal Use/Learning: The Audit Trail  If you have IAM identities (users, roles) and compute workloads running in AWS, there is no excuse to not be using Amazon GuardDuty."/>
+Part 1 - AWS For Personal Use/Learning: Secure Multi-Account Setup Part 2 - AWS For Personal Use/Learning: Identity and Access Management Part 3 - AWS For Personal Use/Learning: Account Level Guardrails Part 4 - AWS For Personal Use/Learning: The Audit Trail If you have IAM identities (users, roles) and compute workloads running in AWS, there is no excuse to not be using Amazon GuardDuty."/>
 
 	
   </head>
@@ -253,7 +252,7 @@
       
         <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -325,7 +324,7 @@
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://dariushall.com" >
-    &copy;  Darius Hall 2021 
+    &copy;  Darius Hall 2023 
   </a>
     <div>
 
