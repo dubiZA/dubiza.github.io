@@ -142,6 +142,8 @@ Total: 16 (MEDIUM: 5, HIGH: 9, CRITICAL: 2)
 
 While the total vuln count is down by 3, the interesting thing is we've increased our count of critical severity vulnerabilities from 1 to 2. Also of interest is that a number of the vulnerabilities in the distroless image are as a result of Python. Upon investigation, it appears the distroless Python 3 image is running on Python 3.9.2 while I was using base containers on Python 3.11.
 
+## Conclusion
+
 While I could go back and rebuild images using Python 3.9.2, I think the point is made. It tends to be that the larger the image size, the greater the number of vulnerabilities. Were the distroless Python image running a more up-to-date version of Python, 10 of the vulnerabilities detected would not exist, bringing the count down to 6 total with only one critical and three highs.
 
 Are distroless images a panacea to help reduce attack surface? Maybe, maybe not. Are they the solution to curbing time spent on vulnerability management efforts across teams? Again, maybe and maybe not. What I get out of this exercise is that if there are options to reduce the count of components in a product deployment (such as minimal/slim or distroless images), it is worth putting in some time to investigate this with your product teams. Vulnerability management is not just about plugging holes so attackers don't get in. I think it's often more about maintaining customer trust and holding on to compliance certifications when auditors come around. Minimal container images are one way to reduce the burden of toil on security, infrastructure, and product engineering teams.
