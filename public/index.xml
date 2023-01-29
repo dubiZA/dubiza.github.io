@@ -6,7 +6,17 @@
     <description>Recent content in Welcome... on Darius Hall</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 19 Jun 2021 15:58:00 -0600</lastBuildDate><atom:link href="https://dariushall.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 Jan 2023 18:35:16 -0700</lastBuildDate><atom:link href="https://dariushall.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Distroless Containers</title>
+      <link>https://dariushall.com/post/containers/distroless-python/</link>
+      <pubDate>Sat, 28 Jan 2023 18:35:16 -0700</pubDate>
+      
+      <guid>https://dariushall.com/post/containers/distroless-python/</guid>
+      <description>What do you do when there are constantly vulnerabilities in production? Well, if your product runs heavily in containers, trying to deal with them before they make it into production is an option. In this post, I&amp;rsquo;m going to look at various ways of building container images and see how the vulnerability count changes depending on how to container is built.
+I&amp;rsquo;m going to use Python for this because it&amp;rsquo;s a language I&amp;rsquo;m comfortable with.</description>
+    </item>
+    
     <item>
       <title>Part 5 - AWS For Personal Use/Learning: Intelligent Threat Detection</title>
       <link>https://dariushall.com/post/aws/securing-a-personal-aws-account/intelligent-threat-detection-part-5/</link>
