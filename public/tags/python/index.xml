@@ -8,12 +8,12 @@
     <language>en-us</language>
     <lastBuildDate>Sat, 28 Jan 2023 18:35:16 -0700</lastBuildDate><atom:link href="https://dariushall.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Distroless Containers</title>
-      <link>https://dariushall.com/post/containers/distroless-python/</link>
+      <title>Base Container Image Size and Vulnerabilities</title>
+      <link>https://dariushall.com/post/containers/base-container-images-size-and-vulnerabilities/</link>
       <pubDate>Sat, 28 Jan 2023 18:35:16 -0700</pubDate>
       
-      <guid>https://dariushall.com/post/containers/distroless-python/</guid>
-      <description>What do you do when there are constantly vulnerabilities in production? Well, if your product runs heavily in containers, trying to deal with them before they make it into production is an option. In this post, I&amp;rsquo;m going to look at various ways of building container images and see how the vulnerability count changes depending on how to container is built.
+      <guid>https://dariushall.com/post/containers/base-container-images-size-and-vulnerabilities/</guid>
+      <description>What do you do when there are constantly vulnerabilities in production? Well, if your product runs heavily in containers, trying to deal with them before they make it into production is an option. In this post, I&amp;rsquo;m going to look at packaging a small Python code base in images of various sizes and how that can affect vulnerability counts in the end &amp;ldquo;product&amp;rdquo;.
 I&amp;rsquo;m going to use Python for this because it&amp;rsquo;s a language I&amp;rsquo;m comfortable with.</description>
     </item>
     

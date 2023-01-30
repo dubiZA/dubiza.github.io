@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://dariushall.com/post/containers/base-container-images-size-and-vulnerabilities/</loc>
+    <lastmod>2023-01-28T18:35:16-07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
     <loc>https://dariushall.com/tags/containers/</loc>
     <lastmod>2023-01-28T18:35:16-07:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://dariushall.com/tags/distroless/</loc>
-    <lastmod>2023-01-28T18:35:16-07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://dariushall.com/post/containers/distroless-python/</loc>
     <lastmod>2023-01-28T18:35:16-07:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
